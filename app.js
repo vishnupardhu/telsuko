@@ -64,19 +64,19 @@ app.use("/sectionpost", testsectionpostApis);
 app.use("/sectionfetch", testsectionfetchApis);
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "../templates/index.html"))
+    res.sendFile(path.join(__dirname, "./templates/index.html"))
 });
 
 app.get('/terms-of-use', (req, res) => {
-    res.sendFile(path.join(__dirname, "../templates/terms-and-conditions.html"))
+    res.sendFile(path.join(__dirname, "./templates/terms-and-conditions.html"))
 });
 
 app.get('/privacy-policy', (req, res) => {
-    res.sendFile(path.join(__dirname, "../templates/privacy-policy.html"))
+    res.sendFile(path.join(__dirname, "./templates/privacy-policy.html"))
 });
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../templates/error_404.html"))
+    res.sendFile(path.join(__dirname, "./templates/error_404.html"))
 });
 
 const main = async() => {
