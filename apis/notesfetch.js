@@ -37,12 +37,9 @@ import { uploadPostImage as uploader } from "../middlewares/uploader.js";
 
 const router = Router();
 
-/**
- * @description To Upload Post Image
- * @api /posts/api/post-image-upload
- * @access private
- * @type POST
- */
+
+
+
 router.get("/chapters", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -123,6 +120,13 @@ router.get("/fetch/homestory", userAuth, async(req, res) => {
     // }
 });
 
+
+
+
+
+
+
+
 router.get("/fetch/homenotes/:noteid", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -149,6 +153,11 @@ router.get("/fetch/homenotes/:noteid", userAuth, async(req, res) => {
     //     //return res.sendFile(join(__dirname, "../templates/errors.html"));
     // }
 });
+
+
+
+
+
 
 router.get("/homenotes/chapters/", userAuth, async(req, res) => {
     // try {
@@ -177,6 +186,14 @@ router.get("/homenotes/chapters/", userAuth, async(req, res) => {
     //     //return res.sendFile(join(__dirname, "../templates/errors.html"));
     // }
 });
+
+
+
+
+
+
+
+
 router.get("/fetch/homenotes/chapters/", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -205,6 +222,14 @@ router.get("/fetch/homenotes/chapters/", userAuth, async(req, res) => {
     // }
 });
 
+
+
+
+
+
+
+
+
 router.get("/fetch/notes/getchapters/:noteid", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -232,6 +257,13 @@ router.get("/fetch/notes/getchapters/:noteid", userAuth, async(req, res) => {
     //     //return res.sendFile(join(__dirname, "../templates/errors.html"));
     // }
 });
+
+
+
+
+
+
+
 router.get("/fetch/mynotes/unpublished", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -262,6 +294,14 @@ router.get("/fetch/mynotes/unpublished", userAuth, async(req, res) => {
     // }
 });
 
+
+
+
+
+
+
+
+
 router.get("/fetch/mynotes/published", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -291,6 +331,16 @@ router.get("/fetch/mynotes/published", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
+
 router.post("/api/quest/view", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -317,11 +367,7 @@ router.post("/api/quest/view", userAuth, async(req, res) => {
             return res.status(404).json({
                 "quest": "not found",
             });
-
         });
-
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -329,6 +375,9 @@ router.post("/api/quest/view", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
 
 
 
@@ -361,6 +410,15 @@ router.get("/fetch/mynotes/chapters/:noteid", userAuth, async(req, res) => {
     //     //return res.sendFile(join(__dirname, "../templates/errors.html"));
     // }
 });
+
+
+
+
+
+
+
+
+
 router.post("/fetch/mynotes/chapters", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -393,6 +451,12 @@ router.post("/fetch/mynotes/chapters", userAuth, async(req, res) => {
     // }
 });
 
+
+
+
+
+
+
 router.post("/fetch/homenotes/chapters", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -424,6 +488,12 @@ router.post("/fetch/homenotes/chapters", userAuth, async(req, res) => {
     // }
 });
 
+
+
+
+
+
+
 router.post("/homenotes/view", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -452,11 +522,7 @@ router.post("/homenotes/view", userAuth, async(req, res) => {
                 message: "view not updated",
                 success: false,
             });
-
         });
-
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -464,6 +530,15 @@ router.post("/homenotes/view", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
 router.post("/homenotes/chapter/view", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -492,11 +567,7 @@ router.post("/homenotes/chapter/view", userAuth, async(req, res) => {
                 message: "view not updated",
                 success: false,
             });
-
         });
-
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -504,6 +575,13 @@ router.post("/homenotes/chapter/view", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
 
 
 router.post("/home/notes/chapter/like", userAuth, async(req, res) => {
@@ -624,15 +702,9 @@ router.post("/home/notes/chapter/like", userAuth, async(req, res) => {
                     const response2 = {
                         message: "unlike updated",
                     };
-
-
                 });
-
         }
-
     }
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -640,6 +712,13 @@ router.post("/home/notes/chapter/like", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
 
 
 router.post("/home/notes/chapter/view", userAuth, async(req, res) => {
@@ -668,11 +747,7 @@ router.post("/home/notes/chapter/view", userAuth, async(req, res) => {
             return res.status(404).json({
                 "quest": "not found",
             });
-
         });
-
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -680,6 +755,15 @@ router.post("/home/notes/chapter/view", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
 
 router.post("/home/notes/like", userAuth, async(req, res) => {
     // try {
@@ -803,15 +887,9 @@ router.post("/home/notes/like", userAuth, async(req, res) => {
                     const response2 = {
                         message: "unlike updated",
                     };
-
-
                 });
-
         }
-
     }
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -819,6 +897,13 @@ router.post("/home/notes/like", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
 
 router.get("/search/:searchtext", userAuth, async(req, res) => {
     try {
@@ -869,6 +954,14 @@ router.get("/search/:searchtext", userAuth, async(req, res) => {
         });
     }
 });
+
+
+
+
+
+
+
+
 router.get("/searchnotes/:searchtext", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -918,6 +1011,16 @@ router.get("/searchnotes/:searchtext", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
+
 router.post("/home/notes/view", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -947,11 +1050,7 @@ router.post("/home/notes/view", userAuth, async(req, res) => {
                 message: "no view updated",
                 status: false
             });
-
         });
-
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -959,6 +1058,11 @@ router.post("/home/notes/view", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
 
 router.get(
     "/comment/:noteid",
@@ -984,12 +1088,20 @@ router.get(
                 success: true,
                 message: "Your comment found.",
             });
-
         }
-
-
     }
 );
+
+
+
+
+
+
+
+
+
+
+
 router.get(
     "/comments/:noteid",
     userAuth,
@@ -1014,10 +1126,7 @@ router.get(
                 success: true,
                 message: "Your comment found.",
             });
-
         }
-
-
     }
 );
 

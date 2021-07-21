@@ -41,12 +41,8 @@ import { uploadPostImage as uploader } from "../middlewares/uploader.js";
 
 const router = Router();
 
-/**
- * @description To Upload Post Image
- * @api /posts/api/post-image-upload
- * @access private
- * @type POST
- */
+
+
 
 router.get("/htests", userAuth, async(req, res) => {
     // try {
@@ -64,14 +60,12 @@ router.get("/htests", userAuth, async(req, res) => {
             limit: limit
         }
     }
-
     if (startIndex > 0) {
         results.previous = {
             page: page - 1,
             limit: limit
         }
     }
-
     let tests = await modelsections.find({
         modelsectionstatus: "published"
     }).populate("userid", "profileid").populate({
@@ -97,6 +91,9 @@ router.get("/htests", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
 
 
 router.get("/homesection/published", userAuth, async(req, res) => {
@@ -128,6 +125,9 @@ router.get("/homesection/published", userAuth, async(req, res) => {
     // }
 });
 
+
+
+
 router.get("/search/:searchterm", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -144,16 +144,13 @@ router.get("/search/:searchterm", userAuth, async(req, res) => {
             limit: limit
         }
     }
-
     if (startIndex > 0) {
         results.previous = {
             page: page - 1,
             limit: limit
         }
     }
-
     var regexv = new RegExp(req.params.searchterm, 'i');
-    //  console.log(regexv);
     let testresults = await modelsections.find({ $or: [{ modelsectiontitle: regexv }, { modelsectioncategory: regexv }, { modelsectiondescript: regexv }] }).populate("userid", "profileid").populate({
         path: 'userid',
         select: 'profileid',
@@ -177,6 +174,12 @@ router.get("/search/:searchterm", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
 router.get(
     "/homesection/quests/:sectionid",
     userAuth,
@@ -184,14 +187,11 @@ router.get(
         // try {
         // Create a new Post
         let { body, user, file } = req;
-
-
         let homequests = await Sectquestlists.find({ sectionid: req.params.sectionid }).populate('questid').populate({
             path: 'userid',
             select: 'profileid',
             populate: { path: 'profileid', select: 'name avatar ispopular' }
         });
-
         if (homequests) {
             return res.status(200).json({
                 homequests,
@@ -204,7 +204,6 @@ router.get(
                 message: "not found",
             });
         }
-
         // } catch (err) {
         //     return res.status(501).json({
         //         success: false,
@@ -213,6 +212,10 @@ router.get(
         // }
     }
 );
+
+
+
+
 router.get(
     "/section/myquests/:sectionid",
     userAuth,
@@ -220,14 +223,11 @@ router.get(
         // try {
         // Create a new Post
         let { body, user, file } = req;
-
-
         let myquests = await Sectquestlists.find({ userid: user._id, sectionid: req.params.sectionid }).populate('questid').populate({
             path: 'userid',
             select: 'profileid',
             populate: { path: 'profileid', select: 'name avatar ispopular' }
         });
-
         if (myquests) {
             return res.status(200).json({
                 myquests,
@@ -240,7 +240,6 @@ router.get(
                 message: "not found",
             });
         }
-
         // } catch (err) {
         //     return res.status(501).json({
         //         success: false,
@@ -249,6 +248,12 @@ router.get(
         // }
     }
 );
+
+
+
+
+
+
 router.get(
     "/section/myquestlist/:sectionid",
     userAuth,
@@ -256,7 +261,6 @@ router.get(
         // try {
         // Create a new Post
         let { body, user, } = req;
-
         let myquestlist = await Sectquestlists.find({ userid: user._id, sectionid: req.params.sectionid });
         if (myquestlist) {
             return res.status(200).json({
@@ -270,7 +274,6 @@ router.get(
                 message: "not found",
             });
         }
-
         // } catch (err) {
         //     return res.status(501).json({
         //         success: false,
@@ -279,6 +282,13 @@ router.get(
         // }
     }
 );
+
+
+
+
+
+
+
 router.get("/api/section", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -307,6 +317,11 @@ router.get("/api/section", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
 router.get("/api/section/published", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -336,6 +351,18 @@ router.get("/api/section/published", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
+
+
+
 router.get("/api/section/unpublished", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -366,6 +393,9 @@ router.get("/api/section/unpublished", userAuth, async(req, res) => {
     // }
 });
 
+
+
+
 router.post("/section/myquestionlist", userAuth, async(req, res) => {
     // try {
     let { user, file, body } = req;
@@ -395,6 +425,13 @@ router.post("/section/myquestionlist", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
 router.post(
     "/sectionfetch/api/section",
     userAuth,
@@ -404,10 +441,8 @@ router.post(
         let { body, user, file } = req;
         var image, image1 = "";
         var qtype1 = "Blank";
-
         if (body) {
             if (!file) {
-                console.log(req.body);
                 let quest = new Quest({
                     userid: user._id,
                     qtitle: body.qtitle,
@@ -426,37 +461,10 @@ router.post(
                 await quest.save();
                 return res.status(200).json({
                     quest,
-                    //file,
                     success: true,
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
-
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -481,12 +489,8 @@ router.post(
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -499,12 +503,9 @@ router.post(
         // }
     }
 );
-/**
- * @description To like a post by authenticated user
- * @api /posts/api/like-post
- * @access private
- * @type PUT
- */
+
+
+
 
 
 router.get(
@@ -515,10 +516,8 @@ router.get(
         // Create a new Post
         let { body, user } = req;
         var sectionid = req.params.sectionid;
-
         if (sectionid != null) {
             let testressult = await testrank.findOne({ userid: user._id, sectionid: req.params.sectionid });
-
             if (testressult === null) {
                 return res.status(403).json({
                     status: false,
@@ -533,7 +532,6 @@ router.get(
                     message: "Your have  attempted the Test",
                 });
             }
-
         } else {
             return res.status(501).json({
                 success: false,
@@ -552,9 +550,6 @@ router.post("/test/view", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
     var testid = body.testid;
-    //console.log(req.body);
-    //let questsp = await Quest.findOneAndUpdate({ _id: questid });
-
     var testviu = await modelsections.findOneAndUpdate({ _id: testid }, {
             $inc: {
                 modelsectionviewcount: 1,
@@ -565,12 +560,8 @@ router.post("/test/view", userAuth, async(req, res) => {
             const response = {
                 message: "view updated",
                 status: true
-                    //quest: questviu
             };
-
-
         });
-
     if (testviu != null) {
         return res.status(201).json({
             message: "view updated",
@@ -589,6 +580,7 @@ router.post("/test/view", userAuth, async(req, res) => {
     //     });
     // }
 });
+
 router.get(
     "/test/myanswers/:sectionid",
     userAuth,
@@ -597,12 +589,9 @@ router.get(
         // Create a new Post
         let { body, user } = req;
         var sectionid = req.params.sectionid;
-
-
         if (sectionid != null) {
             let myanswers = await sectionanswer.find({ userid: user._id, sectionid: req.params.sectionid }).populate('questid').populate({
                 path: 'questid',
-
                 populate: {
                     path: 'userid',
                     select: 'profileid',
@@ -630,8 +619,6 @@ router.get(
                 message: "try again",
             });
         }
-
-
         // } catch (err) {
         //     return res.status(501).json({
         //         success: false,
@@ -640,4 +627,5 @@ router.get(
         // }
     }
 );
+
 export default router;

@@ -52,12 +52,10 @@ router.post(
         let { body, user, file } = req;
         console.log(body.questid);
         if (body) {
-
             let findquest = await Sectquestlists.findOne({
                 userid: user._id,
                 sectionid: body.sectionid,
                 questid: body.questid,
-
             });
             if (!findquest) { // console.log(req.body);
                 let section = new Sectquestlists({
@@ -68,7 +66,6 @@ router.post(
                     qcat: body.qcat,
                     qstatus: body.qstatus,
                     modelsectionliststatus: "published",
-
                 });
                 await section.save();
                 await modelsections.findOneAndUpdate({ _id: body.sectionid }, {
@@ -169,16 +166,15 @@ router.post("/section/addquest", userAuth, async(req, res) => {
                 modelsectionliststatus: "published",
             });
             await addquest.save();
-
-            let findtest = await modelsections.findOneAndUpdate({ _id: body.sectionid });
+            let findtest = await modelsections.findOne({ _id: body.sectionid });
             var total = 1;
-            total = parseInt(findtest.modelsectiontotalmarks) + parseInt(body.questmarks);
+            total = findtest.modelsectiontotalmarks + parseFloat(body.questmarks);
             let testviu = await modelsections.findOneAndUpdate({ _id: body.sectionid }, {
                     $inc: {
                         modelsectiontotalquestions: 1,
                     },
                     $set: {
-                        modelsectiontotalmarks: parseInt(total),
+                        modelsectiontotalmarks: total,
                     },
                 },
                 async(err, testviu) => {
@@ -223,7 +219,6 @@ router.post(
         // try {
         // Create a new Post
         let { body, user } = req;
-
         if (body) {
             await modelsections.findOneAndUpdate({ _id: body.sectionid, userid: user._id }, {
                     $set: {
@@ -266,8 +261,6 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
     var questlikeid = body.questid;
     var questlikeidstatus = body.questlikestatus;
     let questslikein = await Questlike.findOne({ userid: user._id, questid: questlikeid });
-    // console.log(req.body);
-    //let questsp = await Quest.findOneAndUpdate({ _id: questid });
     if (!questslikein) {
         if (questslikein.questlikestatus === true) {
             let _questlike = new Questlike({
@@ -288,7 +281,6 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     const response = {
                         message: "like updated",
                     };
-
 
                 });
             return res.status(200).json({
@@ -411,22 +403,14 @@ router.post(
         let { body, user } = req;
         var sectionid = body.sectionid;
         var attemptfrom = "section";
-
         var recordsinserted = false;
         var answerlist = [];
         answerlist = body.myanswers;
         var count = answerlist.length;
         var insertcount = 0;
-        // count = answerlist.length;
-        console.log("ERR", count);
-        console.log("ERR", body);
         if (body) {
             let testressult = await testrank.findOne({ userid: user._id, sectionid: body.sectionid });
-            console.log("ERR", testressult);
             if (testressult === null) {
-
-
-
                 for (let index = 0; index < answerlist.length; index++) {
                     const element = answerlist[index];
                     let testresponse = await sectionanswer.findOne({ userid: user._id, sectionid: element.sectionid, questid: element.questid, answerattemptfrom: attemptfrom });
@@ -451,79 +435,8 @@ router.post(
                             answertime: element.questTiming,
                             useranswerstatus: "published",
                         }, { ordered: false })
-
-
                     }
-
-
-
-                    // let testresponse = await sectionanswer.findOne({ userid: user._id, sectionid: element.sectionid, questid: element.questid, answerattemptfrom: attemptfrom });
-                    // if (testresponse === null) {
-                    //     let newresponse = new sectionanswer({
-                    //         userid: user._id,
-                    //         questownerid: element.questcreator,
-                    //         sectionid: element.sectionid,
-                    //         questid: element.questid,
-                    //         questcat: element.questcat,
-                    //         questtype: element.questtype,
-                    //         useranswerreponse: element.useranswerresp,
-                    //         ansquestpositive: element.questpositive,
-                    //         ansquestnegative: parseFloat(element.questnegative),
-                    //         answerattempttype: element.attempttype,
-                    //         answerattemptfrom: attemptfrom,
-                    //         useranswermarks: parseFloat(element.marks),
-                    //         useranswerscore: element.score,
-                    //         noattemptcount: element.noattempt,
-                    //         rightcount: element.rightattempt,
-                    //         wrongcount: element.wrongattempt,
-                    //         answertime: element.questTiming,
-                    //         useranswerstatus: "published",
-                    //     });
-                    //     await newresponse.save();
-                    //     insertcount++;
-                    //     console.log("ERR", insertcount);
-                    //     if (answerlist.length === insertcount) {
-
-                    //         recordsinserted = true;
-                    //         console.log("ERR", recordsinserted);
-                    //     }
-
-                    // }
                 }
-
-                // body.myanswers.forEach(element => {
-                //     // let testresponse = await sectionanswer.findOne({ userid: user._id, sectionid: element.sectionid, questid: element.questid, answerattemptfrom: attemptfrom });
-                //     // if (!testresponse) {
-                //     let newresponse = new sectionanswer({
-                //         userid: user._id,
-                //         questownerid: element.questcreator,
-                //         sectionid: element.sectionid,
-                //         questid: element.questid,
-                //         questcat: element.questcat,
-                //         questtype: element.questtype,
-                //         useranswerreponse: element.useranswerresp,
-                //         ansquestpositive: element.questpositive,
-                //         ansquestnegative: parseFloat(element.questnegative),
-                //         answerattempttype: element.attempttype,
-                //         answerattemptfrom: attemptfrom,
-                //         useranswermarks: parseFloat(element.marks),
-                //         useranswerscore: element.score,
-                //         noattemptcount: element.noattempt,
-                //         rightcount: element.rightattempt,
-                //         wrongcount: element.wrongattempt,
-                //         answertime: element.questTiming,
-                //         useranswerstatus: "published",
-                //     });
-                //     newresponse.save();
-                //     count++;
-
-                //     if (parseInt(body.answercount) === count) {
-                //         recordsinserted = true;
-                //     }
-
-                // });
-                //if (recordsinserted === true) {
-                console.log("ERR", body.myresults);
                 let newresponse = new testrank({
                     userid: user._id,
                     sectionid: body.myresults.sectionid,
@@ -544,7 +457,6 @@ router.post(
                         $inc: {
                             modelsectionattemptcount: 1,
                         },
-
                     },
                     async(err, testviu) => {
                         if (err) return res.status(501).send(err);
@@ -553,8 +465,6 @@ router.post(
                             status: true
                                 //quest: questviu
                         };
-
-
                     });
                 return res.status(200).json({
                     status: true,
@@ -562,9 +472,6 @@ router.post(
                     message: "Your test is saved.",
                 });
                 //  }
-
-
-
             } else {
                 return res.status(201).json({
                     status: false,

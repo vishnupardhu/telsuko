@@ -34,12 +34,6 @@ import storylike from "../models/storiesmodel/stories-model-like.js";
 import storycomment from "../models/storiesmodel/stories-model-comment.js";
 
 
-
-
-
-
-
-
 import { userAuth } from "../middlewares/auth-guard.js";
 import SlugGenerator from "../functions/slug-generator.js";
 import validator from "../middlewares/validator-middleware.js";
@@ -48,12 +42,8 @@ import { uploadPostImage as uploader } from "../middlewares/uploader.js";
 
 const router = Router();
 
-/**
- * @description To Upload Post Image
- * @api /posts/api/post-image-upload
- * @access private
- * @type POST
- */
+
+
 router.get("/chapters", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -105,6 +95,10 @@ router.get("/chapters", userAuth, async(req, res) => {
 });
 
 
+
+
+
+
 router.get("/fetch/story", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -133,6 +127,9 @@ router.get("/fetch/story", userAuth, async(req, res) => {
 });
 
 
+
+
+
 router.get("/fetch/homestory", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -159,6 +156,14 @@ router.get("/fetch/homestory", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
 router.get("/fetch/homestory/:storyid", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -185,6 +190,12 @@ router.get("/fetch/homestory/:storyid", userAuth, async(req, res) => {
     //     //return res.sendFile(join(__dirname, "../templates/errors.html"));
     // }
 });
+
+
+
+
+
+
 router.get("/homestory/chapters/", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -212,6 +223,15 @@ router.get("/homestory/chapters/", userAuth, async(req, res) => {
     //     //return res.sendFile(join(__dirname, "../templates/errors.html"));
     // }
 });
+
+
+
+
+
+
+
+
+
 router.get("/fetch/homestory/chapters/", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -239,6 +259,15 @@ router.get("/fetch/homestory/chapters/", userAuth, async(req, res) => {
     //     //return res.sendFile(join(__dirname, "../templates/errors.html"));
     // }
 });
+
+
+
+
+
+
+
+
+
 router.get("/fetch/mystory/unpublished", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -269,6 +298,12 @@ router.get("/fetch/mystory/unpublished", userAuth, async(req, res) => {
     // }
 });
 
+
+
+
+
+
+
 router.get("/fetch/mystory/published", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -298,13 +333,19 @@ router.get("/fetch/mystory/published", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
 router.post("/api/quest/view", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
     var questviewid = body.questid;
     console.log(req.body);
     //let questsp = await Quest.findOneAndUpdate({ _id: questid });
-
     var questviu = await Quest.find({ _id: questviewid }, {
             $inc: {
                 qviewscount: 1,
@@ -324,11 +365,7 @@ router.post("/api/quest/view", userAuth, async(req, res) => {
             return res.status(404).json({
                 "quest": "not found",
             });
-
         });
-
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -336,6 +373,12 @@ router.post("/api/quest/view", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
 
 
 
@@ -367,6 +410,12 @@ router.get("/fetch/story/getchapters/:storyid", userAuth, async(req, res) => {
     //     //return res.sendFile(join(__dirname, "../templates/errors.html"));
     // }
 });
+
+
+
+
+
+
 router.get("/fetch/mystory/chapters/:storyid", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -396,6 +445,14 @@ router.get("/fetch/mystory/chapters/:storyid", userAuth, async(req, res) => {
     //     //return res.sendFile(join(__dirname, "../templates/errors.html"));
     // }
 });
+
+
+
+
+
+
+
+
 router.post("/fetch/mystory/chapters", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -431,13 +488,14 @@ router.post("/fetch/mystory/chapters", userAuth, async(req, res) => {
 
 
 
+
+
 router.post("/homestories/view", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
     var noteid = body.noteid;
     //console.log(req.body);
     //let questsp = await Quest.findOneAndUpdate({ _id: questid });
-
     var questviu = await modelstories.findOneAndUpdate({ _id: noteid }, {
             $inc: {
                 storyread: 1,
@@ -459,11 +517,7 @@ router.post("/homestories/view", userAuth, async(req, res) => {
                 message: "view not updated",
                 success: false,
             });
-
         });
-
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -471,14 +525,23 @@ router.post("/homestories/view", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
+
+
 router.post("/homestories/chapter/view", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
     var storyid = body.storyid;
-
     //console.log(req.body);
     //let questsp = await Quest.findOneAndUpdate({ _id: questid });
-
     var storychapviu = await modelstorychaps.findOneAndUpdate({ _id: storyid }, {
             $inc: {
                 scread: 1,
@@ -500,11 +563,7 @@ router.post("/homestories/chapter/view", userAuth, async(req, res) => {
                 message: "view not updated",
                 success: false,
             });
-
         });
-
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -512,12 +571,11 @@ router.post("/homestories/chapter/view", userAuth, async(req, res) => {
     //     });
     // }
 });
-/**
- * @description To create a new post by the authenticated User
- * @api /posts/api/create-post
- * @access private
- * @type POST
- */
+
+
+
+
+
 
 router.post("/home/story/chapter/like", userAuth, async(req, res) => {
     // try {
@@ -534,7 +592,6 @@ router.post("/home/story/chapter/like", userAuth, async(req, res) => {
                 storychapid: storylikeid,
                 sclikestatus: true,
                 scstatus: "valid",
-
             });
             await _sclike.save();
             await modelstorychaps.findOneAndUpdate({ _id: storylikeid }, {
@@ -547,8 +604,6 @@ router.post("/home/story/chapter/like", userAuth, async(req, res) => {
                     const response = {
                         message: "like updated",
                     };
-
-
                 });
             return res.status(200).json({
                 success: true,
@@ -560,7 +615,6 @@ router.post("/home/story/chapter/like", userAuth, async(req, res) => {
                 storychapid: storylikeid,
                 sclikestatus: false,
                 scstatus: "valid",
-
             });
             await _scunlike.save();
             await modelstorychaps.findOneAndUpdate({ _id: storylikeid }, {
@@ -573,8 +627,6 @@ router.post("/home/story/chapter/like", userAuth, async(req, res) => {
                     const response = {
                         message: "unlike updated",
                     };
-
-
                 });
             return res.status(200).json({
                 success: true,
@@ -582,7 +634,6 @@ router.post("/home/story/chapter/like", userAuth, async(req, res) => {
             });
         }
     } else {
-
         if (storylikein.scstatus === false) {
             await storychaplike.findOneAndUpdate({ userid: user._id, storychapid: storylikeid }, {
                     $set: {
@@ -594,12 +645,10 @@ router.post("/home/story/chapter/like", userAuth, async(req, res) => {
                     const response3 = {
                         message: "like updated",
                     };
-
                     return res.status(201).json({
                         message: "like updated",
                     });
                 });
-
             await modelstorychaps.findOneAndUpdate({ _id: storylikeid }, {
                     $inc: {
                         sclikes: 1,
@@ -610,12 +659,8 @@ router.post("/home/story/chapter/like", userAuth, async(req, res) => {
                     const response4 = {
                         message: "like updated",
                     };
-
-
                 });
-
         } else {
-
             await storychaplike.findOneAndUpdate({ userid: user._id, storychapid: storylikeid }, {
                     $set: {
                         sclikestatus: false,
@@ -629,7 +674,6 @@ router.post("/home/story/chapter/like", userAuth, async(req, res) => {
                     return res.status(201).json({
                         "quest": response1,
                     });
-
                 });
             await modelstorychaps.findOneAndUpdate({ _id: storylikeid }, {
                     $inc: {
@@ -641,15 +685,9 @@ router.post("/home/story/chapter/like", userAuth, async(req, res) => {
                     const response2 = {
                         message: "unlike updated",
                     };
-
-
                 });
-
         }
-
     }
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -657,6 +695,14 @@ router.post("/home/story/chapter/like", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
 
 
 router.post("/home/story/chapter/view", userAuth, async(req, res) => {
@@ -685,11 +731,7 @@ router.post("/home/story/chapter/view", userAuth, async(req, res) => {
             return res.status(404).json({
                 "quest": "not found",
             });
-
         });
-
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -698,13 +740,16 @@ router.post("/home/story/chapter/view", userAuth, async(req, res) => {
     // }
 });
 
+
+
+
+
+
 router.post("/home/story/like", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
     var storyid = body.storyid;
-
     let storylikin = await storylike.findOne({ userid: user._id, storyid: storyid });
-
     //let questsp = await Quest.findOneAndUpdate({ _id: questid });
     if (storylikin === null) {
         if (storylikin === storylikin) {
@@ -713,7 +758,6 @@ router.post("/home/story/like", userAuth, async(req, res) => {
                 storyid: storyid,
                 slikestatus: true,
                 sstatus: "valid",
-
             });
             await _slike.save();
             await modelstories.findOneAndUpdate({ _id: storyid }, {
@@ -726,8 +770,6 @@ router.post("/home/story/like", userAuth, async(req, res) => {
                     const response = {
                         message: "like updated",
                     };
-
-
                 });
             return res.status(200).json({
                 success: true,
@@ -739,7 +781,6 @@ router.post("/home/story/like", userAuth, async(req, res) => {
                 storyid: storyid,
                 slikestatus: false,
                 sstatus: "valid",
-
             });
             await _sunlike.save();
             await modelstories.findOneAndUpdate({ _id: storyid }, {
@@ -752,8 +793,6 @@ router.post("/home/story/like", userAuth, async(req, res) => {
                     const response = {
                         message: "unlike updated",
                     };
-
-
                 });
             return res.status(200).json({
                 success: true,
@@ -761,7 +800,6 @@ router.post("/home/story/like", userAuth, async(req, res) => {
             });
         }
     } else {
-
         if (storylikin.sstatus === false) {
             await storylike.findOne({ userid: user._id, storyid: storyid }, {
                     $set: {
@@ -773,12 +811,10 @@ router.post("/home/story/like", userAuth, async(req, res) => {
                     const response3 = {
                         message: "like updated",
                     };
-
                     return res.status(201).json({
                         "quest": response3,
                     });
                 });
-
             await modelstories.findOneAndUpdate({ _id: storyid }, {
                     $inc: {
                         storylikes: 1,
@@ -789,12 +825,8 @@ router.post("/home/story/like", userAuth, async(req, res) => {
                     const response4 = {
                         message: "like updated",
                     };
-
-
                 });
-
         } else {
-
             await storylike.findOne({ userid: user._id, storyid: storyid }, {
                     $set: {
                         slikestatus: false,
@@ -820,15 +852,9 @@ router.post("/home/story/like", userAuth, async(req, res) => {
                     const response2 = {
                         message: "unlike updated",
                     };
-
-
                 });
-
         }
-
     }
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -836,6 +862,14 @@ router.post("/home/story/like", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
 
 router.get("/search/:searchterm", userAuth, async(req, res) => {
     // try {
@@ -846,21 +880,18 @@ router.get("/search/:searchterm", userAuth, async(req, res) => {
     const startIndex = (page - 1) * limit
     const endIndex = page * limit
     const results = {}
-
     if (endIndex < await modelstories.countDocuments().exec()) {
         results.next = {
             page: page + 1,
             limit: limit
         }
     }
-
     if (startIndex > 0) {
         results.previous = {
             page: page - 1,
             limit: limit
         }
     }
-
     var regexv = new RegExp(req.params.searchterm, 'i');
     //  console.log(regexv);
     let quests = await modelstories.find({ $or: [{ storytitle: regexv }, { storygenere: regexv }, { storydescriptions: regexv }, { storysubgenere: regexv }, { storymentions: regexv }] }).populate("userid", "profileid").populate({
@@ -886,6 +917,15 @@ router.get("/search/:searchterm", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
 router.get("/searchstory/:searchterm", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -895,21 +935,18 @@ router.get("/searchstory/:searchterm", userAuth, async(req, res) => {
     const startIndex = (page - 1) * limit
     const endIndex = page * limit
     const results = {}
-
     if (endIndex < await modelstorychaps.countDocuments().exec()) {
         results.next = {
             page: page + 1,
             limit: limit
         }
     }
-
     if (startIndex > 0) {
         results.previous = {
             page: page - 1,
             limit: limit
         }
     }
-
     var regexv = new RegExp(req.params.searchterm, 'i');
     //  console.log(regexv);
     let storyresults = await modelstorychaps.find({ $or: [{ sctitle: regexv }, { scgenere: regexv }, { scdescriptions: regexv }] }).populate("userid", "profileid").populate({
@@ -935,13 +972,19 @@ router.get("/searchstory/:searchterm", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
 router.post("/home/story/view", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
     var storyid = body.storyid;
-    //console.log(req.body);
-    //let questsp = await Quest.findOneAndUpdate({ _id: questid });
-
     var storyviu = await modelstories.findOneAndUpdate({ _id: storyid }, {
             $inc: {
                 storyread: 1,
@@ -952,7 +995,6 @@ router.post("/home/story/view", userAuth, async(req, res) => {
             const response = {
                 message: "view updated",
                 status: true
-                    //quest: questviu
             };
             if (storyviu) {
                 return res.status(201).json({
@@ -964,11 +1006,7 @@ router.post("/home/story/view", userAuth, async(req, res) => {
                 message: "no view updated",
                 status: false
             });
-
         });
-
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -976,6 +1014,13 @@ router.post("/home/story/view", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
 router.get(
     "/comment/:storyid",
     userAuth,
@@ -1007,6 +1052,12 @@ router.get(
     }
 );
 
+
+
+
+
+
+
 router.get(
     "/comments/:storyid",
     userAuth,
@@ -1031,10 +1082,7 @@ router.get(
                 success: true,
                 message: "Your comment found.",
             });
-
         }
-
-
     }
 );
 export default router;

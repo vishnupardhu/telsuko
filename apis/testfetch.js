@@ -40,13 +40,6 @@ import { uploadTestImage as uploader } from "../middlewares/uploader.js";
 
 const router = Router();
 
-/**
- * @description To Upload Post Image
- * @api /posts/api/post-image-upload
- * @access private
- * @type POST
- */
-
 
 router.get("/fetch/mytests/unpublished", userAuth, async(req, res) => {
     // try {
@@ -77,6 +70,9 @@ router.get("/fetch/mytests/unpublished", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
 
 router.get("/fetch/mytests/published", userAuth, async(req, res) => {
     // try {

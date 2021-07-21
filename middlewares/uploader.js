@@ -15,6 +15,7 @@ const s3 = new aws.S3({
 });
 
 
+
 export const uploadviss3 = multer({
     storage: multerS3({
         s3: s3,
@@ -261,6 +262,22 @@ export const uploadPostImage = multer({
         },
     }),
 });
+export const uploadExplImage = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: "mytheory",
+        acl: "public-read",
+        metadata: function(req, file1, cb) {
+            cb(null, { fieldName: file1.fieldname });
+        },
+        key: function(req, file1, cb) {
+            let _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
+            let lastIndexof = file1.originalname.lastIndexOf(".");
+            let ext = file1.originalname.substring(lastIndexof);
+            cb(null, `post-${Date.now().toString(36) + Math.random().toString(36).slice(2)}${Date.now()}${ext}`);
+        },
+    }),
+});
 export const uploadTestImage = multer({
     storage: multerS3({
         s3: s3,
@@ -395,13 +412,13 @@ const upload = multer({
         s3: s3,
         bucket: "mytheory",
         acl: "public-read",
-        metadata: function(req, file, cb) {
-            cb(null, { fieldName: file.fieldname });
+        metadata: function(req, file1, cb) {
+            cb(null, { fieldName: file1.fieldname });
         },
-        key: function(req, file, cb) {
+        key: function(req, file1, cb) {
             let _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
-            let lastIndexof = file.originalname.lastIndexOf(".");
-            let ext = file.originalname.substring(lastIndexof);
+            let lastIndexof = file1.originalname.lastIndexOf(".");
+            let ext = file1.originalname.substring(lastIndexof);
             cb(null, `mydesk-${Date.now().toString(36) + Math.random().toString(36).slice(2)}${Date.now()}${ext}`);
         },
     }),

@@ -10,12 +10,9 @@ import { userAuth } from "../middlewares/auth-guard.js";
 const router = Router();
 
 
-/**
- * @description To create profile of the authenticated User
- * @type POST <multipart-form> request
- * @api /profiles/api/create-profile
- * @access Private
- */
+
+
+
 router.patch(
     "/api/create-question",
     userAuth,
@@ -59,30 +56,14 @@ router.patch(
         });
 
 
-        //     await User.findOneAndUpdate({ _id: user._id }, {
-
-        //         isprofileverified = true,
-
-        //     },
-        //     (err, data) => {
-        //         if (err) return res.status(500).send(err);
-        //         const response = {
-        //             message: "profile updated successfully",
-
-
-        //         };
-        //         return res.status(200).send(response);
-        //     }
-        // );
-
-        // } catch (err) {
-        //     return res.status(400).json({
-        //         success: false,
-        //         messgae: "Unable to create your profile.",
-        //     });
-        // }
     }
 );
+
+
+
+
+
+
 router.post(
     "/api/create-profile",
     userAuth,
@@ -126,28 +107,6 @@ router.post(
         });
 
 
-        //     await User.findOneAndUpdate({ _id: user._id }, {
-
-        //         isprofileverified = true,
-
-        //     },
-        //     (err, data) => {
-        //         if (err) return res.status(500).send(err);
-        //         const response = {
-        //             message: "profile updated successfully",
-
-
-        //         };
-        //         return res.status(200).send(response);
-        //     }
-        // );
-
-        // } catch (err) {
-        //     return res.status(400).json({
-        //         success: false,
-        //         messgae: "Unable to create your profile.",
-        //     });
-        // }
     }
 );
 
@@ -172,6 +131,13 @@ router.put(
         }
     }
 );
+
+
+
+
+
+
+
 router.patch("/addprofileimage", userAuth,
     uploadProfileAvatar.single("avatar"), async(req, res) => {
         let { user, file } = req;
@@ -193,6 +159,10 @@ router.patch("/addprofileimage", userAuth,
             }
         );
     });
+
+
+
+
 
 
 router.patch("/addcoverimage", userAuth,
@@ -230,12 +200,11 @@ router.get("/checkProfile", userAuth, (req, res) => {
         }
     });
 });
-/**
- * @description To Get the authenticated user's profile
- * @api /profiles/api/my-profile
- * @access Private
- * @type GET
- */
+
+
+
+
+
 router.get("/api/my-profile", userAuth, async(req, res) => {
     try {
         let profile = await Profile.findOne({ account: req.user._id }).populate(
@@ -260,12 +229,11 @@ router.get("/api/my-profile", userAuth, async(req, res) => {
     }
 });
 
-/**
- * @description To update autheticated user's profile
- * @type PUT <multipart-form> request
- * @api /profiles/api/update-profile
- * @access Private
- */
+
+
+
+
+
 router.put(
     "/api/update-profile",
     userAuth,
@@ -292,12 +260,12 @@ router.put(
     }
 );
 
-/**
- * @description To get user's profile with the username
- * @api /profiles/api/update-profile
- * @access Public
- * @type GET
- */
+
+
+
+
+
+
 router.get("/api/profile-user/:username", async(req, res) => {
     try {
         let { username } = req.params;

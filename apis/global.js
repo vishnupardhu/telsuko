@@ -39,6 +39,11 @@ import { postValidations } from "../validators/post-validators.js";
 import { uploadPostImage as uploader } from "../middlewares/uploader.js";
 
 const router = Router();
+
+
+
+
+
 router.get("/home", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -76,28 +81,7 @@ router.get("/home", userAuth, async(req, res) => {
     }).sort({ "createdAt": -1 }).limit(limit).skip(startIndex).exec();
 
 
-    // const startIndexstory = (page - 1) * limit
-    // const endIndexstory = page * limit
-    // const resultsstory = {}
-    // if (endIndexstory < await modelstories.countDocuments().exec()) {
-    //     resultsstory.next = {
-    //         page: page + 1,
-    //         limit: limit
-    //     }
-    // }
 
-    // if (startIndexstory > 0) {
-    //     resultsstory.previous = {
-    //         page: page - 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // let storie = await modelstories.find({ userid: myuserid }).populate("userid", "profileid").populate({
-    //     path: 'userid',
-    //     select: 'profileid',
-    //     populate: { path: 'profileid', select: 'name avatar ispopular' }
-    // }).sort({ "createdAt": -1 }).limit(limit).skip(startIndexstory).exec();
 
 
     const startIndexstorychap = (page - 1) * limit
@@ -123,29 +107,6 @@ router.get("/home", userAuth, async(req, res) => {
         populate: { path: 'profileid', select: 'name avatar ispopular' }
     }).sort({ "createdAt": -1 }).limit(limit).skip(startIndexstorychap).exec();
 
-
-    // const startIndextopic = (page - 1) * limit
-    // const endIndextopic = page * limit
-    // const resultstopic = {}
-    // if (endIndextopic < await modelnotes.countDocuments().exec()) {
-    //     resultstopic.next = {
-    //         page: page + 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // if (startIndextopic > 0) {
-    //     resultstopic.previous = {
-    //         page: page - 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // let topic = await modelnotes.find({ userid: myuserid }).populate("userid", "profileid").populate({
-    //     path: 'userid',
-    //     select: 'profileid',
-    //     populate: { path: 'profileid', select: 'name avatar ispopular' }
-    // }).sort({ "createdAt": -1 }).limit(limit).skip(startIndextopic).exec();
 
 
     const startIndextopicvol = (page - 1) * limit
@@ -224,6 +185,19 @@ router.get("/home", userAuth, async(req, res) => {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.get("/myposts", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -261,28 +235,6 @@ router.get("/myposts", userAuth, async(req, res) => {
     }).sort({ "createdAt": -1 }).limit(limit).skip(startIndex).exec();
 
 
-    // const startIndexstory = (page - 1) * limit
-    // const endIndexstory = page * limit
-    // const resultsstory = {}
-    // if (endIndexstory < await modelstories.countDocuments().exec()) {
-    //     resultsstory.next = {
-    //         page: page + 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // if (startIndexstory > 0) {
-    //     resultsstory.previous = {
-    //         page: page - 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // let storie = await modelstories.find({ userid: myuserid }).populate("userid", "profileid").populate({
-    //     path: 'userid',
-    //     select: 'profileid',
-    //     populate: { path: 'profileid', select: 'name avatar ispopular' }
-    // }).sort({ "createdAt": -1 }).limit(limit).skip(startIndexstory).exec();
 
 
     const startIndexstorychap = (page - 1) * limit
@@ -308,29 +260,6 @@ router.get("/myposts", userAuth, async(req, res) => {
         populate: { path: 'profileid', select: 'name avatar ispopular' }
     }).sort({ "createdAt": -1 }).limit(limit).skip(startIndexstorychap).exec();
 
-
-    // const startIndextopic = (page - 1) * limit
-    // const endIndextopic = page * limit
-    // const resultstopic = {}
-    // if (endIndextopic < await modelnotes.countDocuments().exec()) {
-    //     resultstopic.next = {
-    //         page: page + 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // if (startIndextopic > 0) {
-    //     resultstopic.previous = {
-    //         page: page - 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // let topic = await modelnotes.find({ userid: myuserid }).populate("userid", "profileid").populate({
-    //     path: 'userid',
-    //     select: 'profileid',
-    //     populate: { path: 'profileid', select: 'name avatar ispopular' }
-    // }).sort({ "createdAt": -1 }).limit(limit).skip(startIndextopic).exec();
 
 
     const startIndextopicvol = (page - 1) * limit
@@ -408,6 +337,20 @@ router.get("/myposts", userAuth, async(req, res) => {
     // }
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.get("/myquests", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -445,30 +388,6 @@ router.get("/myquests", userAuth, async(req, res) => {
     }).sort({ "createdAt": -1 }).limit(limit).skip(startIndex).exec();
 
 
-    // const startIndexstory = (page - 1) * limit
-    // const endIndexstory = page * limit
-    // const resultsstory = {}
-    // if (endIndexstory < await modelstories.countDocuments().exec()) {
-    //     resultsstory.next = {
-    //         page: page + 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // if (startIndexstory > 0) {
-    //     resultsstory.previous = {
-    //         page: page - 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // let storie = await modelstories.find({ userid: myuserid }).populate("userid", "profileid").populate({
-    //     path: 'userid',
-    //     select: 'profileid',
-    //     populate: { path: 'profileid', select: 'name avatar ispopular' }
-    // }).sort({ "createdAt": -1 }).limit(limit).skip(startIndexstory).exec();
-
-
 
     //  modelsectioncategory
     if (quests === null) {
@@ -491,6 +410,12 @@ router.get("/myquests", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
 
 router.get("/yourposts/:userid", userAuth, async(req, res) => {
     // try {
@@ -525,31 +450,6 @@ router.get("/yourposts/:userid", userAuth, async(req, res) => {
         populate: { path: 'profileid', select: 'name avatar ispopular' }
     }).sort({ "createdAt": -1 }).limit(limit).skip(startIndex).exec();
 
-
-    // const startIndexstory = (page - 1) * limit
-    // const endIndexstory = page * limit
-    // const resultsstory = {}
-    // if (endIndexstory < await modelstories.countDocuments().exec()) {
-    //     resultsstory.next = {
-    //         page: page + 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // if (startIndexstory > 0) {
-    //     resultsstory.previous = {
-    //         page: page - 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // let storie = await modelstories.find({ userid: req.params.userid }).populate("userid", "profileid").populate({
-    //     path: 'userid',
-    //     select: 'profileid',
-    //     populate: { path: 'profileid', select: 'name avatar ispopular' }
-    // }).sort({ "createdAt": -1 }).limit(limit).skip(startIndexstory).exec();
-
-
     const startIndexstorychap = (page - 1) * limit
     const endIndexstorychap = page * limit
     const resultsstorychap = {}
@@ -572,32 +472,6 @@ router.get("/yourposts/:userid", userAuth, async(req, res) => {
         select: 'profileid',
         populate: { path: 'profileid', select: 'name avatar ispopular' }
     }).sort({ "createdAt": -1 }).limit(limit).skip(startIndexstorychap).exec();
-
-
-    // const startIndextopic = (page - 1) * limit
-    // const endIndextopic = page * limit
-    // const resultstopic = {}
-    // if (endIndextopic < await modelnotes.countDocuments().exec()) {
-    //     resultstopic.next = {
-    //         page: page + 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // if (startIndextopic > 0) {
-    //     resultstopic.previous = {
-    //         page: page - 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // let topic = await modelnotes.find({ userid: req.params.userid }).populate("userid", "profileid").populate({
-    //     path: 'userid',
-    //     select: 'profileid',
-    //     populate: { path: 'profileid', select: 'name avatar ispopular' }
-    // }).sort({ "createdAt": -1 }).limit(limit).skip(startIndextopic).exec();
-
-
     const startIndextopicvol = (page - 1) * limit
     const endIndextopicvol = page * limit
     const resultstopicvol = {}
@@ -658,10 +532,8 @@ router.get("/yourposts/:userid", userAuth, async(req, res) => {
     return res.status(200).json({
         quests,
         stories,
-
         tests,
         topics,
-
         success: true,
         message: "quests available.",
     });
@@ -764,10 +636,6 @@ router.get("/favourites", userAuth, async(req, res) => {
         path: 'notechapid',
         populate: { path: 'notesref' }
     }).sort({ "createdAt": -1 }).limit(limit).skip(startIndexstorychap).exec();
-
-
-
-
     //  modelsectioncategory
     if (quests === null) {
         return res.status(404).json({
@@ -790,6 +658,12 @@ router.get("/favourites", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
 
 
 router.get(
@@ -823,6 +697,15 @@ router.get(
         }
     }
 );
+
+
+
+
+
+
+
+
+
 router.get(
     "/quest/likelist",
     userAuth,
@@ -853,6 +736,13 @@ router.get(
     }
 );
 
+
+
+
+
+
+
+
 router.get(
     "/story/likelist",
     userAuth,
@@ -864,9 +754,7 @@ router.get(
 
             if (storylikelist != null) {
                 return res.status(200).json({
-
                     storylikelist,
-
                     success: true,
                     message: "found",
                 });
@@ -884,6 +772,11 @@ router.get(
         }
     }
 );
+
+
+
+
+
 
 router.get(
     "/topic/likelist",
@@ -914,4 +807,6 @@ router.get(
         }
     }
 );
+
+
 export default router;

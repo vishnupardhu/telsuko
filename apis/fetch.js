@@ -17,12 +17,6 @@ import { uploadPostImage as uploader } from "../middlewares/uploader.js";
 
 const router = Router();
 
-/**
- * @description To Upload Post Image
- * @api /posts/api/post-image-upload
- * @access private
- * @type POST
- */
 router.post(
     "/api/quests/upload",
     userAuth,
@@ -45,12 +39,11 @@ router.post(
     }
 );
 
-/**
- * @description To create a new post by the authenticated User
- * @api /posts/api/create-post
- * @access private
- * @type POST
- */
+
+
+
+
+
 router.post(
     "/quest/create-mcq5",
     uploader.single("qmedia"),
@@ -63,7 +56,6 @@ router.post(
         var qtype5 = "Mcq-5";
         if (body) {
             if (!file) {
-                console.log(req.body);
 
                 let quest = new Quest({
                     userid: user._id,
@@ -92,32 +84,6 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
-
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = DOMAIN + "/" + new Date().getTime() + "-" + file.filename;
                 let quest = new Quest({
                     userid: user._id,
@@ -148,10 +114,7 @@ router.post(
             }
 
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -164,6 +127,10 @@ router.post(
         // }
     }
 );
+
+
+
+
 router.post(
     "/quest/create-mcq4",
     uploader.single("qmedia"),
@@ -176,8 +143,6 @@ router.post(
         var qtype4 = "Mcq-4";
         if (body) {
             if (!file) {
-                console.log(req.body);
-
                 let quest = new Quest({
                     userid: user._id,
                     qtitle: body.qtitle,
@@ -204,32 +169,6 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
-
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = DOMAIN + "/" + new Date().getTime() + "-" + file.filename;
                 let quest = new Quest({
                     userid: user._id,
@@ -257,12 +196,8 @@ router.post(
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -275,6 +210,11 @@ router.post(
         // }
     }
 );
+
+
+
+
+
 router.post(
     "/quest/create-mcq3",
     uploader.single("qmedia"),
@@ -287,8 +227,6 @@ router.post(
         var qtype3 = "Mcq-3";
         if (body) {
             if (!file) {
-                console.log(req.body);
-
                 let quest = new Quest({
                     userid: user._id,
                     qtitle: body.qtitle,
@@ -314,32 +252,6 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
-
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = DOMAIN + "/" + new Date().getTime() + "-" + file.filename;
                 let quest = new Quest({
                     userid: user._id,
@@ -366,12 +278,8 @@ router.post(
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -384,6 +292,13 @@ router.post(
         // }
     }
 );
+
+
+
+
+
+
+
 router.post(
     "/quest/create-mcq2",
     uploader.single("qmedia"),
@@ -396,7 +311,6 @@ router.post(
         var qtype2 = "Mcq-2";
         if (body) {
             if (!file) {
-                console.log(req.body);
 
                 let quest = new Quest({
                     userid: user._id,
@@ -422,32 +336,7 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
 
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = DOMAIN + "/" + new Date().getTime() + "-" + file.filename;
                 let quest = new Quest({
                     userid: user._id,
@@ -473,12 +362,8 @@ router.post(
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -491,12 +376,12 @@ router.post(
         // }
     }
 );
-/**
- * @description To update a post by the authenticated User
- * @api /posts/api/upadte-post
- * @access private
- * @type PUT
- */
+
+
+
+
+
+
 router.put(
     "/api/update-post/:id",
     userAuth,
@@ -537,6 +422,13 @@ router.put(
         }
     }
 );
+
+
+
+
+
+
+
 router.post(
     "/quest/create-blank",
     uploader.single("qmedia"),
@@ -575,32 +467,7 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
 
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = DOMAIN + "/" + new Date().getTime() + "-" + file.filename;
                 let quest = new Quest({
                     userid: user._id,
@@ -625,12 +492,8 @@ router.post(
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -643,12 +506,10 @@ router.post(
         // }
     }
 );
-/**
- * @description To like a post by authenticated user
- * @api /posts/api/like-post
- * @access private
- * @type PUT
- */
+
+
+
+
 router.put("/api/like-post/:id", userAuth, async(req, res) => {
     try {
         let { id } = req.params;

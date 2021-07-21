@@ -99,7 +99,5 @@ const QuestionSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 QuestionSchema.plugin(Paginator);
-
-
 const userquestions = mongoose.model("questions", QuestionSchema);
 export default userquestions;

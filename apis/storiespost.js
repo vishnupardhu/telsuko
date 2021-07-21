@@ -43,20 +43,9 @@ import { uploadStoriesImage } from "../middlewares/uploader.js";
 
 const router = Router();
 
-/**
- * @description To Upload Post Image
- * @api /posts/api/post-image-upload
- * @access private
- * @type POST
- */
 
 
-/**
- * @description To create a new post by the authenticated User
- * @api /posts/api/create-post
- * @access private
- * @type POST
- */
+
 router.post(
     "/create/story",
     userAuth,
@@ -65,12 +54,9 @@ router.post(
         // try {
         // Create a new Post
         let { body, user, file } = req;
-
         var media = req.file.location;
         if (body) {
             if (!file) {
-                // console.log(req.body);
-
                 return res.status(404).json({
                     success: false,
                     message: "file not uploaded.",
@@ -89,12 +75,10 @@ router.post(
                 });
                 await newstorys.save();
                 return res.status(201).json({
-
                     success: true,
                     message: "Your story is published.",
                 });
             }
-
         } else {
             return res.status(400).json({
                 success: false,
@@ -109,6 +93,12 @@ router.post(
         // }
     }
 );
+
+
+
+
+
+
 router.post(
     "/create/storychapter",
     userAuth,
@@ -146,16 +136,12 @@ router.post(
                         const response4 = {
                             message: "chapter updated",
                         };
-
-
                     });
                 return res.status(201).json({
-
                     success: true,
                     message: "Your story chapter is published.",
                 });
             }
-
         } else {
             return res.status(400).json({
                 success: false,
@@ -170,6 +156,9 @@ router.post(
         // }
     }
 );
+
+
+
 
 
 
@@ -189,18 +178,13 @@ router.post(
                 },
                 async(err, profile) => {
                     if (err) return res.status(501).send(err);
-
                     return res.status(201).json({
-
                         success: true,
                         message: "Your story is published.",
                     });
-
                 });
-
         } else {
             return res.status(404).json({
-
                 success: false,
                 message: "Please fill the fields.",
             });
@@ -217,14 +201,15 @@ router.post(
 );
 
 
+
+
+
 router.post("/api/quest/like", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
     var questlikeid = body.questid;
     var questlikeidstatus = body.questlikestatus;
     let questslikein = await Questlike.findOne({ userid: user._id, questid: questlikeid });
-    console.log(req.body);
-    //let questsp = await Quest.findOneAndUpdate({ _id: questid });
     if (!questslikein) {
         if (questslikein.questlikestatus === true) {
             let _questlike = new Questlike({
@@ -245,8 +230,6 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     const response = {
                         message: "like updated",
                     };
-
-
                 });
             return res.status(200).json({
                 success: true,
@@ -258,7 +241,6 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                 questid: questlikeid,
                 questlikestatus: false,
                 queststatus: "valid",
-
             });
             await _questunlike.save();
             await Quest.findOneAndUpdate({ _id: questlikeid }, {
@@ -271,8 +253,6 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     const response = {
                         message: "unlike updated",
                     };
-
-
                 });
             return res.status(200).json({
                 success: true,
@@ -280,7 +260,6 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
             });
         }
     } else {
-
         if (questslikein.questlikestatus === false) {
             await Questlike.findOneAndUpdate({ userid: user._id, questid: questlikeid }, {
                     $set: {
@@ -292,12 +271,10 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     const response3 = {
                         message: "like updated",
                     };
-
                     return res.status(201).json({
                         "quest": response3,
                     });
                 });
-
             await Quest.findOneAndUpdate({ _id: questlikeid }, {
                     $inc: {
                         qlikecount: +1,
@@ -308,12 +285,8 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     const response4 = {
                         message: "like updated",
                     };
-
-
                 });
-
         } else {
-
             await Questlike.findOneAndUpdate({ userid: user._id, questid: questlikeid }, {
                     $set: {
                         questlikestatus: false,
@@ -327,7 +300,6 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     return res.status(201).json({
                         "quest": response1,
                     });
-
                 });
             await Quest.findOneAndUpdate({ _id: questlikeid }, {
                     $inc: {
@@ -339,15 +311,9 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     const response2 = {
                         message: "unlike updated",
                     };
-
-
                 });
-
         }
-
     }
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -355,6 +321,16 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
+
 router.post(
     "/story/comment",
     userAuth,
@@ -370,7 +346,6 @@ router.post(
                 qcomment: body.qcomment,
                 questioncommentstatus: "published",
             });
-
             await newcomment.save();
             await Quest.findOneAndUpdate({ _id: storyid }, {
                     $inc: {
@@ -382,8 +357,6 @@ router.post(
                     const response = {
                         message: "comment updated",
                     };
-
-
                 });
             return res.status(200).json({
                 success: true,
@@ -399,6 +372,16 @@ router.post(
 
     }
 );
+
+
+
+
+
+
+
+
+
+
 router.post(
     "/storychapter/comment",
     userAuth,
@@ -444,6 +427,12 @@ router.post(
     }
 );
 
+
+
+
+
+
+
 router.post(
     "/comments",
     userAuth,
@@ -485,6 +474,12 @@ router.post(
 
     }
 );
+
+
+
+
+
+
 router.post(
     "/comment",
     userAuth,
@@ -526,6 +521,9 @@ router.post(
 
     }
 );
+
+
+
 
 
 router.get(

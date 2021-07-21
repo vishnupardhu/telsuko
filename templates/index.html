@@ -2,390 +2,296 @@
 <html lang="en">
 
 <head>
-
-    <!-- SITE TITTLE -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Telsuko</title>
-
-    <!-- PLUGINS CSS STYLE -->
-    <!-- Bootstrap -->
-    <link href="/templates/plugins/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <!-- themify icon -->
-    <link rel="stylesheet" href="/templates/plugins/themify-icons/themify-icons.css">
-    <!-- Slick Carousel -->
-    <link href="/templates/plugins/slick/slick.css" rel="stylesheet">
-    <!-- Slick Carousel Theme -->
-    <link href="/templates/plugins/slick/slick-theme.css" rel="stylesheet">
-
-    <!-- CUSTOM CSS -->
-    <link href="/templates/css/style.css" rel="stylesheet">
-
-    <!-- FAVICON -->
-    <link href="/templates/images/favicon.png" rel="shortcut icon">
-
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telsuko</title>
+  <!-- -------- anime css ------ -->
+  <link rel="stylesheet" href="/templates/assets/css/animate.css">
+  <!-- --------- tiny slider css ------ -->
+  <link rel="stylesheet" href="/templates/assets/css/tiny-slider.css">
+  <!-- --------- font awsome css ------ -->
+  <link rel="stylesheet" href="/templates/assets/css/all.css">
+  <!-- -------- venobox css ------- -->
+  <link rel="stylesheet" href="/templates/assets/css/venobox.css" type="text/css" media="screen" />
+  <!-- ---- Bootstrap css--- -->
+  <link rel="stylesheet" href="/templates/assets/css/bootstrap.min.css">
+  <!-- ---------- default css --------- -->
+  <link rel="stylesheet" href="/templates/assets/css/default.css">
+  <!-- --- style css -->
+  <link rel="stylesheet" href="/templates/assets/css/style.css">
+    
 </head>
 
-<body class="body-wrapper">
-
-
-    <nav class="navbar main-nav fixed-top navbar-expand-lg large">
-        <div class="container">
-            <a class="navbar-brand" href="homepage.html"><img src="/templates/images/logo.png" alt="logo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="ti-menu text-white"></span>
-      </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link scrollTo" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link scrollTo" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link scrollTo" href="#feature">Features</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link scrollTo" href="#team">Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link scrollTo" href="#contact">Contact</a>
-                    </li>
-                </ul>
+<body>
+  <!-- --------- preloader ------------ -->
+  <div class="preloader">
+    <div class="loader">
+      <div class="spinner">
+        <div class="spinner-container">
+          <div class="spinner-rotator">
+            <div class="spinner-left">
+              <div class="spinner-circle"></div>
             </div>
+            <div class="spinner-right">
+              <div class="spinner-circle"></div>
+            </div>
+          </div>
         </div>
-    </nav>
-    <!--=====================================
-=            Homepage Banner            =
-======================================-->
+      </div>
+    </div>
+  </div>
 
-    <section class="banner bg-1" id="home">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 align-self-center">
-                    <!-- Contents -->
-                    <div class="content-block">
-                        <h1>Amazing App Best for E-Learning</h1>
-                        <h5>Let you track everything in your life with a simple way</h5>
-                        <!-- App Badge -->
-                        <div class="app-badge">
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a href="#" class="btn btn-download"><i class="ti-android"></i>
-									<div>Available on the<span>GOOGLE PLAY</span></div>
-								</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#" class="btn btn-download"><i class="ti-apple"></i>
-									<div>Coming Soon<span>Apple store</span></div>
-								</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <!-- App Image -->
-                    <div class="image-block">
-                        <img class="img-fluid phone-thumb" src="/templates/images/phones/iphone-banner.png" alt="iphone-banner">
-                    </div>
-                </div>
+
+
+  <!-------   Header star ------>
+  <header class="header-area">
+    <div class="navbar-area">
+      <!---- navbar star--->
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img class="image" src="/templates/assets/img/header/logo/landapp-logo.png" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                  <a class="nav-link active" data-scroll-nav="0" aria-current="page" href="/#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-scroll-nav="1" href="/#feature">Features</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-scroll-nav="2" href="/#about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-scroll-nav="3" href="/#review">Reviews</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-scroll-nav="4" href="/#team">Team</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-scroll-nav="5" href="/#faq">FAQ</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-scroll-nav="6" href="/#download">Download</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-scroll-nav="7" href="/#contact">Contact</a>
+                </li>
+
+              </ul>
+
             </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <!---- navbar end--->
+    <div class="header-hero" data-scroll-index="0">
+      <!---- home star ------>
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+      <div class="shape shape-6"></div>
+      <div class="container">
+        <div class="row align-items-center justify-content-center justify-content-lg-between">
+          <div class="col-lg-6 col-md-10">
+            <div class="header-hero-content">
+              <h1 class="header-title wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.2s"><span>Best Free App for Learning</span> Set Your Goals High</h1>
+              <p class="text wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.4s">The most effective, successful professionals are constantly learning, they take the time to apply what they have learned, and they continually work to improve themselves.</p>
+              <ul class="d-flex">
+                <li><a href="" class="main-btn wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.8s">Download
+                    Now</a></li>
+                <li><a href="https://www.youtube.com/watch?v=DxHYso7lDlg" class="header-video venobox wow fadeInLeftBig"
+                    data-autoplay="true" data-vbtype="video" data-wow-duration="3s" data-wow-delay="1.2s"><i
+                      class="fas fa-play"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="header-image">
+              <img src="/templates/assets/img/header/header-app.png" alt="" class="image-1  wow fadeInRightBig"
+                data-wow-duration="3s" data-wow-delay="0.5s">
+            </div>
+          </div>
         </div>
-    </section>
-
-    <!--====  End of Homepage Banner  ====-->
-
-    <!--===========================
-=            About            =
-============================-->
-
-    <section class="about section bg-2" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 align-self-center text-center">
-                    <!-- Image Content -->
-                    <div class="image-block">
-                        <img class="phone-thumb-md" src="/templates/images/phones/iphone-feature.png" alt="iphone-feature" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-10 m-md-auto align-self-center ml-auto">
-                    <div class="about-block">
-                        <!-- About 01 -->
-                        <div class="about-item">
-                            <div class="icon">
-                                <i class="ti-palette"></i>
-                            </div>
-                            <div class="content">
-                                <h5>Creative Design</h5>
-                                <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete accounta</p>
-                            </div>
-                        </div>
-                        <!-- About 02 -->
-                        <div class="about-item active">
-                            <div class="icon">
-                                <i class="ti-panel"></i>
-                            </div>
-                            <div class="content">
-                                <h5>Easy to Use</h5>
-                                <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete accounta</p>
-                            </div>
-                        </div>
-                        <!-- About 03 -->
-                        <div class="about-item">
-                            <div class="icon">
-                                <i class="ti-vector"></i>
-                            </div>
-                            <div class="content">
-                                <h5>Best User Experience</h5>
-                                <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete accounta</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="container">
+        <div class="header-shape-1"></div>
+        <div class="header-shape-2">
+          <img src="assets/img/header/header-shape-2.svg" alt="">
         </div>
-    </section>
+      </div>
+    </div>
+    <!---- home star ------>
+  </header>
+  <!--------   Header End ----  -->
 
-    <!--====  End of About  ====-->
-
-    <!--==============================
-=            Features            =
-===============================-->
-
-    <section class="section feature" id="feature">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h2>App Features</h2>
-                        <p>Demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee idea of denouncing pleasure and praising</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row bg-elipse">
-                <div class="col-lg-4 align-self-center text-center text-lg-right">
-                    <!-- Feature Item -->
-                    <div class="feature-item">
-                        <!-- Icon -->
-                        <div class="icon">
-                            <i class="ti-brush-alt"></i>
-                        </div>
-                        <!-- Content -->
-                        <div class="content">
-                            <h5>Beautiful Interface Design</h5>
-                            <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising</p>
-                        </div>
-                    </div>
-                    <!-- Feature Item -->
-                    <div class="feature-item">
-                        <!-- Icon -->
-                        <div class="icon">
-                            <i class="ti-gift"></i>
-                        </div>
-                        <!-- Content -->
-                        <div class="content">
-                            <h5>Unlimited Features</h5>
-                            <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <!-- Feature Item -->
-                    <div class="feature-item mb-0">
-                        <!-- Icon -->
-                        <div class="icon">
-                            <i class="ti-comments"></i>
-                        </div>
-                        <!-- Content -->
-                        <div class="content">
-                            <h5>Full free chat</h5>
-                            <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising</p>
-                        </div>
-                    </div>
-                    <div class="app-screen">
-                        <img class="img-fluid" src="templates/images/phones/i-phone-screen.png" alt="app-screen">
-                    </div>
-                    <!-- Feature Item -->
-                    <div class="feature-item">
-                        <!-- Icon -->
-                        <div class="icon">
-                            <i class="ti-support"></i>
-                        </div>
-                        <!-- Content -->
-                        <div class="content">
-                            <h5>24/7 support by real people</h5>
-                            <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 text-center text-lg-left align-self-center">
-                    <!-- Feature Item -->
-                    <div class="feature-item">
-                        <!-- Icon -->
-                        <div class="icon">
-                            <i class="ti-image"></i>
-                        </div>
-                        <!-- Content -->
-                        <div class="content">
-                            <h5>Retina ready greaphics</h5>
-                            <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising</p>
-                        </div>
-                    </div>
-                    <!-- Feature Item -->
-                    <div class="feature-item">
-                        <!-- Icon -->
-                        <div class="icon">
-                            <i class="ti-pie-chart"></i>
-                        </div>
-                        <!-- Content -->
-                        <div class="content">
-                            <h5>IOS & android version </h5>
-                            <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- ------- Feature Section Start ---------- -->
+  <section class="feature-section pt-80" id="feature">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-7">
+          <div class="section-title text-center mb-30">
+            <h1 class="mb-25  wow fadeInUp" data-wow-delay=".2s">Awesome <span> Features</span></h1>
+            <p class="wow fadeInUp" data-wow-delay=".4s">Think out of the box and create a learning experience where the learner can interact with the content and their brains.</p>
+          </div>
         </div>
-    </section>
-
-    <!--====  End of Features  ====-->
-
-    <!--=================================
-=            Promo Video            =
-==================================-->
-
-    <section class="section promo-video bg-3 overlay">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Promo Video -->
-                    <div class="video">
-                        <img class="img-fluid" src="/templates/images/backgrounds/promo-video-bg.jpg" alt="video-thumbnail">
-                        <div class="video-button video-box">
-                            <!-- Video Play Button -->
-                            <a href="javascript:void(0)">
-                                <span class="icon" data-video="https://www.youtube.com/embed/jrkvirglgaQ?autoplay=1">
-								<i class="ti-control-play"></i>
-							</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s">
+            <div class="icon color-1">
+              <i class="fas fa-hand-pointer"></i>
             </div>
-        </div>
-    </section>
-
-    <!--====  End of Promo Video  ====-->
-
-
-
-    <!--=============================================
-=            Call to Action Download            =
-==============================================-->
-
-    <section class="cta-download bg-3 overlay">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 text-center">
-                    <div class="image-block"><img class="phone-thumb img-fluid" src="/templates/images/phones/iphone-chat.png" alt=""></div>
-                </div>
-                <div class="col-lg-7">
-                    <div class="content-block">
-                        <!-- Title -->
-                        <h2>Free Download Now</h2>
-                        <!-- Desctcription -->
-                        <p>Demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee idea of denouncing pleasure and praising</p>
-                        <!-- App Badge -->
-                        <div class="app-badge">
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a href="#" class="btn btn-download"><i class="ti-android"></i>
-									<div>Available on the<span>GOOGLE PLAY</span></div>
-								</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#" class="btn btn-download"><i class="ti-apple"></i>
-									<div>Coming Soon<span>Apple store</span></div>
-								</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="content">
+              <h3>Quests</h3>
+              <p>Practice Millions of Quests And Upgrade your skills Daily
+              </p>
             </div>
+          </div>
         </div>
-    </section>
-
-    <!--====  End of Call to Action Download  ====-->
-
-    <!--=============================
-=            Counter            =
-==============================-->
-
-    <section class="section counter bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                    <div class="counter-item">
-                        <!-- Counter Number -->
-                        <h3><span class="count" data-count="29">0</span>k</h3>
-                        <!-- Counter Name -->
-                        <p>Download</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                    <div class="counter-item">
-                        <!-- Counter Number -->
-                        <h3><span class="count" data-count="200">0</span>k</h3>
-                        <!-- Counter Name -->
-                        <p>Active Account</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                    <div class="counter-item">
-                        <!-- Counter Number -->
-                        <h3><span class="count" data-count="60">0</span>k</h3>
-                        <!-- Counter Name -->
-                        <p>Happy User</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                    <div class="counter-item">
-                        <!-- Counter Number -->
-                        <h3><span class="count" data-count="300">0</span>k<sup>+</sup></h3>
-                        <!-- Counter Name -->
-                        <p>Download</p>
-                    </div>
-                </div>
+        <div class="col-lg-4">
+          <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s">
+            <div class="icon color-2">
+              <i class="fas fa-hand-holding-usd"></i>
             </div>
+            <div class="content">
+              <h3>Topics</h3>
+              <p>Lot of Concepts and Topics belonging to different fields short summaries can be read online 
+              </p>
+            </div>
+          </div>
         </div>
-    </section>
+        <div class="col-lg-4">
+          <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.6s">
+            <div class="icon color-3">
+              <i class="fas fa-stethoscope"></i>
+            </div>
+            <div class="content">
+              <h3>Tests</h3>
+              <p>Attempt different types of Tests and improve your Skills 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ------- Feature Section End ---------- -->
+
+  <!-- ----------- About Section Start --------- -->
+  <section class="about-area pt-70 pb-120" id="about">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="about-image wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.5s">
+            <div class="about-shape"></div>
+            <img src="/templates/assets/img/about/about-app.png" alt="" class="app">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="about-content mt-50 wow fadeInRightBig" data-wow-duration="3s" data-wow-delay="0.5s">
+            <div class="section-title">
+              <h1 class="title">Meets All Your Needs</h1>
+              <p class="text">The key to success is to appreciate how people learn, understand the thought process that goes into instructional design, what works well, and a range of different ways of achieving goals.</p>
+            </div>
+            <a href="" class="main-btn">Get The App</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ----------- About Section End --------- -->
+
+  <!-- ----------- Testimonial Section Start ------- -->
+  <section class="testimonial-section" id="review">
+    <div class="container">
+      <div class="row justify-content-center testimonial-active-wrapper">
+        <div class="col-xl-6 col-lg-7">
+          <div class="section-title text-center mb-60">
+            <h1 class="mb-25 text-white wow fadeInUp" data-wow-delay=".2s">What Our App Users Says</h1>
+            <p class="text-white wow fadeInUp" data-wow-delay=".4s">eaching in the Internet age means we must teach tomorrow’s skills today.</p>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-xl-7 col-lg-8">
+            <div class="testimonial-active">
+              <div class="testimonial-wrapper">
+                <div class="single-testimonial">
+                  <div class="info">
+                    <div class="image-2">
+                      <img src="/templates/images/testimonial/client-2.jpg" alt="">
+                    </div>
+                    <h4>Venkatesh</h4>
+                    <p>Best Platform for E-Learning</p>
+                    <div class="quote">
+                      <i class="fas fa-quote-right"></i>
+                    </div>
+                    <div class="content">
+                      <p>I recently joined and I enjoy learning here.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="testimonial-wrapper">
+                <div class="single-testimonial">
+                  <div class="info">
+                    <div class="image-2">
+                      <img src="/templates/images/testimonial/client-1.jpg" alt="">
+                    </div>
+                    <h4>Sridhar</h4>
+                    <p>Best Way to Upgrade Knowledge</p>
+                    <div class="quote">
+                      <i class="fas fa-quote-right"></i>
+                    </div>
+                    <div class="content">
+                      <p>Super Easy to learn New Topics and Practice</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+  <!-- ----------- Testimonial Section End ------- -->
+
+   
 
     <!--====  End of Counter  ====-->
 
     <!--==========================
 =            Team            =
 ===========================-->
+ 
 
-    <section class="section team bg-shape-two" id="team">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title mb-4">
-                        <h2 class="mb-3">Our Creative Team</h2>
-                        <p>Demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee idea of denouncing pleasure and praising</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member -->
-                    <div class="team-member text-center mb-4 mb-lg-0">
-                        <div class="image">
+
+  
+   <section class="feature-section pt-80" id="team">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-7">
+          <div class="section-title text-center mb-30">
+            <h1 class="mb-25  wow fadeInUp" data-wow-delay=".2s">Our Creative <span> Team</span></h1>
+            <p class="wow fadeInUp" data-wow-delay=".4s"></p>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s">
+            <div class="image">
                             <img class="img-fluid" src="/templates/images/team/member-one.jpg" alt="team-member">
                         </div>
                         <div class="name">
@@ -394,32 +300,11 @@
                         <div class="position">
                             <p>Founder</p>
                         </div>
-                        <div class="skill-bar">
-                            <div class="progress">
-                                <div class="progress-bar" style="width:100%;"></div>
-                            </div>
-                            <span>100%</span>
-                        </div>
-                        <ul class="social-icons list-inline">
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-facebook"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-twitter-alt"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-linkedin"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-instagram"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member -->
-                    <div class="team-member text-center mb-4 mb-lg-0">
-                        <div class="image">
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s">
+             <div class="image">
                             <img class="img-fluid" src="/templates/images/team/member-two.jpg" alt="team-member">
                         </div>
                         <div class="name">
@@ -428,32 +313,11 @@
                         <div class="position">
                             <p>Co-Founder</p>
                         </div>
-                        <div class="skill-bar">
-                            <div class="progress">
-                                <div class="progress-bar" style="width:50%;"></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                        <ul class="social-icons list-inline">
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-facebook"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-twitter-alt"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-linkedin"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-instagram"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member -->
-                    <div class="team-member text-center mb-4 mb-lg-0">
-                        <div class="image">
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.6s">
+            <div class="image">
                             <img class="img-fluid" src="/templates/images/team/member-three.jpg" alt="team-member">
                         </div>
                         <div class="name">
@@ -462,205 +326,289 @@
                         <div class="position">
                             <p>Co-Founder</p>
                         </div>
-                        <div class="skill-bar">
-                            <div class="progress">
-                                <div class="progress-bar" style="width:50%;"></div>
-                            </div>
-                            <span>50%</span>
-                        </div>
-                        <ul class="social-icons list-inline">
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-facebook"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-twitter-alt"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-linkedin"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-instagram"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <!-- Team Member -->
-                    <div class="team-member text-center mb-4 mb-lg-0">
-                        <div class="image">
-                            <img class="img-fluid" src="/templates/images/team/member-four.jpg" alt="team-member">
-                        </div>
-                        <div class="name">
-                            <h5>Vishnu Pardhasardhi</h5>
-                        </div>
-                        <div class="position">
-                            <p>UX/UI designer </p>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="progress">
-                                <div class="progress-bar" style="width:100%;"></div>
-                            </div>
-                            <span>100%</span>
-                        </div>
-                        <ul class="social-icons list-inline">
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-facebook"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-twitter-alt"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-linkedin"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="ti-instagram"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </section>
-
+      </div>
+    </div>
+  </section>
     <!--====  End of Team  ====-->
 
     <!--=================================
 =            Testimonial            =
 ==================================-->
 
-    <section class="section testimonial bg-primary-shape" id="testimonial">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h2 class="text-white">Our Happy Users</h2>
-                        <p class="text-white"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-10 mx-auto">
-                    <!-- Testimonial Carosel -->
-                    <div class="testimonial-slider">
-                        <!-- testimonial item -->
-                        <div class="testimonial-item">
-                            <div class="row">
-                                <div class="col-md-5 client-img" style="background-image: url(templates/images/testimonial/client-2.jpg);">
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="p-4 bg-white">
-                                        <strong class="mb-3 d-block">Best Platform for E-Learning</strong>
-                                        <p class="lead font-italic mb-4">I recently joined and I enjoy learning here.</p>
-                                        <h6>Venkatesh</h6>
-                                        <p>CEO - Vishnu Pardhasardhi</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- testimonial item -->
-                        <div class="testimonial-item">
-                            <div class="row">
-                                <div class="col-md-5 client-img" style="background-image: url(templates/images/testimonial/client-1.jpg);">
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="p-4 bg-white">
-                                        <strong class="mb-3 d-block">Best Way to Update Knowledge</strong>
-                                        <p class="lead font-italic mb-4">Super Easy to learn New Topics and Practice </p>
-                                        <h6>Sridhar</h6>
-                                        <p>CEO - Vishnu Pardhasardhi</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 
     <!--====  End of Testimonial  ====-->
 
-    <section class="section cta-subscribe" id="contact">
-        <div class="container">
-            <div class="row bg-elipse-red">
-                <div class="col-lg-4">
-                    <div class="image"><img class="phone-thumb" src="/templates/images/phones/iphone-feature.png"></div>
-                </div>
-                <div class="col-lg-8 align-self-center">
-                    <div class="content">
-                        <div class="mb-4">
-                            <h2>Contact-us</h2>
-                        </div>
-                        <div class="description">
-                            <p>Support@telsuko.com</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+   
+  <!-- ------------ pricing section start --------- -->
+  
+  <!-- --------------pricing section end ------------ -->
+  <!-- ----------- FAQ Section Start --------- -->
+  <section class="faq-section pt-120" id="faq">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-6 col-lg-7">
+          <div class="section-title text-center mb-60">
+            <h1 class="mb-25 wow fadeInUp" data-wow-delay=".2s">Frequencty <span> Asked Queries</span></h1>
+            <p class="mb-25 wow fadeInUp" data-wow-delay=".4s"></p>
+          </div>
         </div>
-    </section>
-
-    <!--============================
-=            Footer            =
-=============================-->
-
-    <footer class="footer-main">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 mr-auto">
-                    <div class="footer-logo">
-                        <img src="/templates/images/logo.png">
-                    </div>
-                    <div class="copyright">
-                        <p>@2019 Themefisher All Rights Reserved
-                        </p>
-                    </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="accordion wow fadeInLeftBig" id="accordionExample" data-wow-duration="3s" data-wow-delay="0.5s">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    What Topics means?
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                   Topics are short notes ,short summaries ,shortcuts,demos And Much more things related to Various fields and subjects                  </div>
                 </div>
-                <div class="col-lg-6 text-lg-right">
-                    <!-- Social Icons -->
-                    <ul class="social-icons list-inline">
-                        <li class="list-inline-item">
-                            <a target="_blank" href="#"><i class="text-primary ti-facebook"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a target="_blank" href="#"><i class="text-primary ti-twitter-alt"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a target="_blank" href="#"><i class="text-primary ti-linkedin"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a target="_blank" href="#"><i class="text-primary ti-instagram"></i></a>
-                        </li>
-                    </ul>
-                    <!-- Footer Links -->
-                    <ul class="footer-links list-inline">
-                        <li class="list-inline-item">
-                            <a class="scrollTo" href="#about">ABOUT</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="scrollTo" href="#team">TEAM</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="scrollTo" href="#contact">CONTACT</a>
-                        </li>
-                    </ul>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    How can I Create a Quest?
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Download the App.Login into your Account.Goto Manage section.Open Manage Quest And Click on Plus icon and Choose type of Quest and Create ?
+                  </div>
                 </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    How can I Attempt Tests?
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                  data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Download the App.Login into your Account.Goto Tests tab .Explore the test You want to Attempt . 
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="faq-image wow fadeInRightBig" data-wow-duration="3s" data-wow-delay="0.5s">
+              <img src="/templates/assets/img/faq/faq-img.svg" alt="">
+            </div>
+          </div>
         </div>
-    </footer>
+      </div>
+  </section>
+  <!-- ----------- FAQ Section End --------- -->
+  <!-- ----------- Download Section Start ------- -->
+  <section class="download-area pt-70 pb-40" id="download">
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg-6 col-md-9">
+          <div class="download-image mt-50 wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.5s">
+            <div class="download-shape-1"></div>
+            <img src="/templates/assets/img/download/download-app.png" alt="" class="image-3">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="download-content mt-45 wow fadeInRightBig" data-wow-duration="3s" data-wow-delay="0.5s">
+            <h1 class="title">Download and Start Using!</h1>
+            <p class="text"></p>
+            <ul>
+           
+              <li><a href="" class="play-store">
+                  <img src="/templates/assets/img/download/play-store.png" alt="">
+                </a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+	  <section class="about-area pt-70 pb-120" id="contact">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="about-image wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.5s">
+            <div class="about-shape"></div>
+            <img src="/templates/assets/img/about/about-app.png" alt="" class="app">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="about-content mt-50 wow fadeInRightBig" data-wow-duration="3s" data-wow-delay="0.5s">
+            <div class="section-title">
+              <h1 class="title">Contact-us</h1>
+                   </div>
+            <a href="#" class="main-btn">Support@telsuko.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ----------- Download Section End ------- -->
+  <!-- --------------Footer Section Start ------- -->
+ <footer class="footer-area">
+    <div class="footer-shape shape-1"></div>
+    <div class="footer-shape shape-2"></div>
+    <div class="footer-shape shape-3"></div>
+    <div class="footer-shape shape-4"></div>
+    <div class="footer-shape shape-5"></div>
+    <div class="footer-shape shape-6"></div>
+    <div class="footer-widget pt-30 pb-80">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-about mt-50">
+              <a href="" class="logo">
+                <img src="/templates/assets/img/header/logo/landapp-logo.png" alt="">
+              </a>
+              <p class="text"></p>
+              <ul class="social">
+                <li><a href="https://www.facebook.com/IAmTelsuko"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://twitter.com/IAmTelsuko"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="https://www.instagram.com/iamtelsuko/"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/telsuko"><i class="fab fa-linkedin-in"></i></a></li>
+				
+				
+              </ul>
+			  
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-6">
+            <div class="footer-link d-flex flex-wrap">
+              <div class="footer-link-wrapper mt-45">
+                <div class="footer-title">
+                  <h4 class="title">Quick Links</h4>
+                </div>
+                <ul class="link">
+                  <li><a href="/#home">Home</a></li>
+                  <li><a href="/#feature">Features</a></li>
+                  <li><a href="/#about">About</a></li>
+                  <li><a href="/#review">Reviews</a></li>
+                  <li><a href="/#download">Download Our App</a></li>
+                </ul>
+              </div>
+              <div class="footer-link-wrapper mt-45">
+                <div class="footer-title">
+                  <h4 class="title">Support</h4>
+                </div>
+                <ul class="link">
+				<li class="active">
+                                <a href="/#faq">FAQ</a>
+                            </li>
+				<li class="active">
+                                <a href="/terms-of-service/">Our Terms and Conditions</a>
+                            </li>
+                  <li class="active">
+                                <a href="/privacy-policy/">Our Pricvacy Policy</a>
+                            </li>
+  
+                            <li>
+                                <a href="/disclaimer/">Our Disclaimer</a>
+                            </li>
+							 <li>
+                                <a href="/copyright-policy/">copyright policy</a>
+                            </li>
+                            <li>
+                                <a href="/content-guidelines/">content guidelines</a>
+                            </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-contact mt-45">
+              <div class="footer-title">
+                <h4 class="title">Quick Links</h4>
+              </div>
+              <ul class="contact-list">
+                <li>
+                  <div class="contact-info">
+                    <div class="info-content media-body">
+                      <p class="text"><i class="fas fa-phone-alt"></i>
+                        +91-8008063828 </p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="contact-info">
+                    <div class="info-content media-body">
+                      <p class="text"><a href=""><i class="far fa-envelope"></i>
+                          support@telsuko.com </a></p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="contact-info">
+                    <div class="info-content media-body">
+                      <p class="text"><a href="https://www.Telsuko.com"><i class="fas fa-globe"></i>
+                          Telsuko.com </a></p>
+                    </div>
+                  </div>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     </footer>
+  <!-- --------------Footer Section End ------- -->
 
 
-    <!-- JAVASCRIPTS -->
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI14J_PNWVd-m0gnUBkjmhoQyNyd7nllA" async defer></script>
 
+
+  <!-- ---- jquery Js ---- -->
+  <script src="/templates/assets/js/jquery-1.12.4.min.js"></script>
+  <!-- -------- venobox js ------ -->
+  <script type="/templates/text/javascript" src="assets/js/venobox.min.js"></script>
+  <!-- ---------- wow js ---------- -->
+  <script src="/templates/assets/js/wow.min.js"></script>
+  <!-- ---------- tiny slider js --------- -->
+  <script src="/templates/assets/js/tiny-slider.js"></script>
+  <!-- ---------- scrollit js ---------- -->
+  <script src="/templates/assets/js/scrollIt.min.js"></script>
+  <!-- -------- font awsome js --------- -->
+  <script src="/templates/assets/js/all.js"></script>
+  <!-- ---- Bootstrap Js ---- -->
+  <script src="/templates/assets/js/bootstrap.min.js"></script>
+  <!-- ---- main js --- -->
+  <script src="/templates/assets/js/main.js"></script>
     <script src="/templates/plugins/jquery/jquery.js"></script>
     <script src="/templates/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="/templates/plugins/slick/slick.min.js"></script>
     <script src="/templates/js/custom.js"></script>
-
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

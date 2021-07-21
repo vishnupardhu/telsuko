@@ -42,12 +42,6 @@ const router = Router();
 
 
 
-/**
- * @description To create a new post by the authenticated User
- * @api /posts/api/create-post
- * @access private
- * @type POST
- */
 
 
 router.post(
@@ -58,12 +52,9 @@ router.post(
         // try {
         // Create a new Post
         let { body, user, file } = req;
-
         var media = req.file.location;
         if (body) {
             if (!file) {
-                // console.log(req.body);
-
                 return res.status(404).json({
                     success: false,
                     message: "file not uploaded.",
@@ -88,7 +79,6 @@ router.post(
                     message: "Your test is published.",
                 });
             }
-
         } else {
             return res.status(400).json({
                 success: false,
@@ -103,6 +93,10 @@ router.post(
         // }
     }
 );
+
+
+
+
 router.post(
     "/create/test",
     uploader.single("tmedia"),
@@ -115,8 +109,6 @@ router.post(
         var qtype5 = "Mcq-5";
         if (body) {
             if (!file) {
-                console.log(req.body);
-
                 let test = new modeltests({
                     userid: user._id,
                     modeltitle: body.mtitle,
@@ -131,13 +123,10 @@ router.post(
                 await test.save();
                 return res.status(200).json({
                     test,
-                    //file,
                     success: true,
                     message: "Your quest is published.",
                 });
             } else {
-
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -159,19 +148,14 @@ router.post(
                     qtitleslug: SlugGenerator(body.qtitle),
                 });
                 await quest.save();
-                //   console.log("NEW_POST", post);
                 return res.status(201).json({
                     quest,
                     success: true,
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -184,6 +168,9 @@ router.post(
         // }
     }
 );
+
+
+
 router.post(
     "/publish/tests/statusupdate",
     userAuth,
@@ -191,7 +178,6 @@ router.post(
         // try {
         // Create a new Post
         let { body, user } = req;
-
         if (body) {
             await modeltests.findOneAndUpdate({ _id: body.testid, userid: user._id }, {
                     $set: {
@@ -200,18 +186,13 @@ router.post(
                 },
                 async(err, profile) => {
                     if (err) return res.status(501).send(err);
-
                     return res.status(201).json({
-
                         success: true,
                         message: "Your story is published.",
                     });
-
                 });
-
         } else {
             return res.status(404).json({
-
                 success: false,
                 message: "Please fill the fields.",
             });
@@ -223,8 +204,7 @@ router.post(
     //         success: false,
     //         message: "Unable to create the quest.",
     //     });
-    // }
-
+    // 
 );
 
 

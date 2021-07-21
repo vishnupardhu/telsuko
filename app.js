@@ -23,15 +23,14 @@ import testpostApis from "./apis/testpost.js";
 import testsectionfetchApis from "./apis/testsectionfetch.js";
 import testsectionpostApis from "./apis/testsectionpost.js";
 const __dirname = path.resolve();
-// import yourData from "./middlewares/passport-middleware.js";
+//require("./middlewares/passport-middleware");
 // Import passport middleware
 
 
 
-// Initialize express application
 const app = express();
 
-// Apply Application Middlewares
+
 app.use(cors());
 app.use(express.json());
 app.use(passport.initialize());
@@ -63,11 +62,12 @@ app.use("/testfetch", testfetchApis);
 app.use("/sectionpost", testsectionpostApis);
 app.use("/sectionfetch", testsectionfetchApis);
 
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "./templates/index.html"))
 });
 
-app.get('/terms-of-use', (req, res) => {
+app.get('/terms-of-service', (req, res) => {
     res.sendFile(path.join(__dirname, "./templates/terms-and-conditions.html"))
 });
 
@@ -75,9 +75,23 @@ app.get('/privacy-policy', (req, res) => {
     res.sendFile(path.join(__dirname, "./templates/privacy-policy.html"))
 });
 
+app.get('/disclaimer', (req, res) => {
+    res.sendFile(path.join(__dirname, "./templates/disclaimer.html"))
+});
+
+app.get('/content-guidelines', (req, res) => {
+    res.sendFile(path.join(__dirname, "./templates/content-guidelines.html"))
+});
+
+app.get('/copyright-policy', (req, res) => {
+    res.sendFile(path.join(__dirname, "./templates/copyright-policy.html"))
+});
+
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "./templates/error_404.html"))
 });
+
+
 
 const main = async() => {
     try {

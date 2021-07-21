@@ -36,12 +36,6 @@ import rankcard from "../models/question/question-rankcard.js";
 
 const router = Router();
 
-/**
- * @description To Upload Post Image
- * @api /posts/api/post-image-upload
- * @access private
- * @type POST
- */
 router.post(
     "/api/quests/upload",
     userAuth,
@@ -64,12 +58,10 @@ router.post(
     }
 );
 
-/**
- * @description To create a new post by the authenticated User
- * @api /posts/api/create-post
- * @access private
- * @type POST
- */
+
+
+
+
 router.post(
     "/quest/comment",
     userAuth,
@@ -115,6 +107,10 @@ router.post(
     }
 );
 
+
+
+
+
 router.post("/api/quest/like", userAuth, async(req, res) => {
     // try {
     let { body, user, file } = req;
@@ -130,7 +126,6 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                 questid: questlikeid,
                 questlikestatus: true,
                 queststatus: "valid",
-
             });
             await _questlike.save();
             await Quest.findOneAndUpdate({ _id: questlikeid }, {
@@ -143,8 +138,6 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     const response = {
                         message: "like updated",
                     };
-
-
                 });
             return res.status(200).json({
                 success: true,
@@ -156,7 +149,6 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                 questid: questlikeid,
                 questlikestatus: false,
                 queststatus: "valid",
-
             });
             await _questunlike.save();
             await Quest.findOneAndUpdate({ _id: questlikeid }, {
@@ -169,8 +161,6 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     const response = {
                         message: "like updated",
                     };
-
-
                 });
             return res.status(200).json({
                 success: true,
@@ -178,7 +168,6 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
             });
         }
     } else {
-
         if (questslikein.questlikestatus === false) {
             await Questlike.findOneAndUpdate({ userid: user._id, questid: questlikeid }, {
                     $set: {
@@ -206,12 +195,8 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     const response4 = {
                         message: "like updated",
                     };
-
-
                 });
-
         } else {
-
             await Questlike.findOneAndUpdate({ userid: user._id, questid: questlikeid }, {
                     $set: {
                         questlikestatus: false,
@@ -237,15 +222,9 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     const response2 = {
                         message: "unlike updated",
                     };
-
-
                 });
-
         }
-
     }
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -253,6 +232,10 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
 router.post(
     "/test/answers",
     userAuth,
@@ -262,10 +245,7 @@ router.post(
         let { body, user } = req;
         var sectionid = body.sectionid;
         let findsectui = await useranswer.findOne({ ansuserid: user._id, ansquestid: body.questid, answerattemptfrom: attemptfrom });
-        if (body.testanswers) {
-
-
-        }
+        if (body.testanswers) {}
         var attemptfrom = "quest";
         let newanswerrespones = await useranswer.findOne({ ansuserid: user._id, ansquestid: body.questid, answerattemptfrom: attemptfrom });
         if (body) {
@@ -320,7 +300,6 @@ router.post(
                     let wroc = parseInt(getrankcard.rightattemptcount) + parseInt(body.rightattempt);
                     let rigm = parseFloat(getrankcard.rightmarks) + parseFloat(body.rightmarks);
                     let wrom = parseFloat(getrankcard.wrongmarks) + parseFloat(body.wrongmarks);
-
                     let tot = rigc + wroc;
                     let accuracy = rigc / parseInt(tot);
                     //console.log(req.body, getrankcard.usermarks, mar, sco, rigc, wroc);
@@ -371,6 +350,9 @@ router.post(
 );
 
 
+
+
+
 router.post(
     "/quest/response/answer",
     userAuth,
@@ -381,8 +363,7 @@ router.post(
         var attemptfrom = "quest";
         let newanswerrespones = await useranswer.findOne({ ansuserid: user._id, ansquestid: body.questid, answerattemptfrom: attemptfrom });
         if (body) {
-            if (!newanswerrespones) {
-                console.log(req.body);
+            if (newanswerrespones === null) {
                 let newresponse = new useranswer({
                     ansuserid: user._id,
                     questownerid: body.questcreator,
@@ -412,15 +393,15 @@ router.post(
                         };
                     });
                 let getrankcard = await rankcard.findOne({ userid: user._id });
-                if (getrankcard != null) {
+                if (getrankcard === null) {
                     let newrankacard = new rankcard({
                         userid: user._id,
-                        usermarks: parseFloat(body.marks),
-                        userscore: parseInt(body.score),
-                        wrongattemptcount: parseInt(body.wrongattempt),
-                        rightattemptcount: parseInt(body.rightattempt),
-                        wrongmarks: parseFloat(body.questpositive),
-                        rightmarks: parseFloat(body.questnegative),
+                        usermarks: (body.marks),
+                        userscore: (body.score),
+                        wrongattemptcount: (body.wrongattempt),
+                        rightattemptcount: (body.rightattempt),
+                        wrongmarks: (body.questpositive),
+                        rightmarks: (body.questnegative),
                         accuracy: 0,
                         rankcardstatus: "valid",
                     });
@@ -430,29 +411,24 @@ router.post(
                     let sco = parseInt(getrankcard.userscore) + parseInt(body.score);
                     let rigc = parseInt(getrankcard.wrongattemptcount) + parseInt(body.wrongattempt);
                     let wroc = parseInt(getrankcard.rightattemptcount) + parseInt(body.rightattempt);
-                    let rigm = parseFloat(getrankcard.rightmarks) + parseFloat(body.rightmarks);
-                    let wrom = parseFloat(getrankcard.wrongmarks) + parseFloat(body.wrongmarks);
-
-                    let tot = rigc + wroc;
-                    let accuracy = rigc % tot;
-                    //console.log(req.body, getrankcard.usermarks, mar, sco, rigc, wroc);
+                    let rigm = parseFloat(getrankcard.rightmarks) + parseFloat(body.questpositive);
+                    let wrom = parseFloat(getrankcard.wrongmarks) + parseFloat(body.questnegative);
+                    var tot = rigc + wroc;
+                    var accuracy = rigc % tot;
+                    if (accuracy === "NaN") {
+                        accuracy = 0;
+                    }
                     await rankcard.findOneAndUpdate({ userid: user._id }, {
-                            $set: {
-                                usermarks: mar,
-                                userscore: sco,
-                                wrongattemptcount: rigc,
-                                rightattemptcount: wroc,
-                                wrongmarks: wrom,
-                                rightmarks: rigm,
-                                accuracy: parseFloat(accuracy),
-                            },
+                        $set: {
+                            usermarks: mar,
+                            userscore: sco,
+                            wrongattemptcount: rigc,
+                            rightattemptcount: wroc,
+                            wrongmarks: wrom,
+                            rightmarks: rigm,
+                            accuracy: accuracy,
                         },
-                        async(err, profile) => {
-                            if (err) return res.status(501).send(err);
-                            const response = {
-                                message: "rankcard updated",
-                            };
-                        });
+                    });
                 }
                 return res.status(200).json({
                     status: true,
@@ -466,7 +442,6 @@ router.post(
                     message: "Your have already answered",
                 });
             }
-
         } else {
             return res.status(400).json({
                 success: false,
@@ -481,6 +456,20 @@ router.post(
         // }
     }
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.post(
     "/quest/rank",
 
@@ -492,8 +481,8 @@ router.post(
         let { body, user, file } = req;
         var image, image1 = "";
         var qtype5 = "Mcq-5";
-
         let getrankcard = await rankcard.findOne({ userid: user._id });
+        console.log(getrankcard);
         if (getrankcard != null) {
             let newrankacard = new rankcard({
                 userid: user._id,
@@ -505,12 +494,11 @@ router.post(
             });
             await newrankacard.save();
         } else {
+            console.log(getrankcard);
             var mar = parseFloat(getrankcard.usermarks) + parseFloat(body.marks);
             var sco = parseFloat(getrankcard.userscore) + parseFloat(body.score);
             var rigc = parseFloat(getrankcard.wrongattemptcount) + parseFloat(body.wrongattempt);
             var wroc = parseFloat(getrankcard.rightattemptcount) + parseFloat(body.rightattempt);
-
-
             await rankcard.findOneAndUpdate({ userid: user._id }, {
                     $set: {
                         usermarks: parseFloat(mar),
@@ -540,6 +528,11 @@ router.post(
 );
 
 
+
+
+
+
+
 router.get(
     "/quest/likelist",
     userAuth,
@@ -547,7 +540,6 @@ router.get(
         // try {
         // Create a new Post
         let { body, user, file } = req;
-
         let userp = await User.findOne({ _id: user._id });
         if (userp) {
             let likelist = await Questlike.find({ userid: user._id, questlikestatus: true });
@@ -577,6 +569,15 @@ router.get(
         // }
     }
 );
+
+
+
+
+
+
+
+
+
 router.post(
     "/quest/a/mcq5",
     uploader.single("qmedia"),
@@ -589,8 +590,6 @@ router.post(
         var qtype5 = "Mcq-5";
         if (body) {
             if (file != null) {
-                console.log(req.body);
-
                 let quest = new Quest({
                     userid: user._id,
                     qtitle: body.qtitle,
@@ -618,32 +617,7 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
 
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -672,12 +646,8 @@ router.post(
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -690,6 +660,16 @@ router.post(
         // }
     }
 );
+
+
+
+
+
+
+
+
+
+
 router.post(
     "/quest/create/mcq4",
     uploader.single("qmedia"),
@@ -702,7 +682,7 @@ router.post(
         var qtype4 = "Mcq-4";
         if (body) {
             if (file != null) {
-                console.log(req.body);
+
 
                 let quest = new Quest({
                     userid: user._id,
@@ -730,32 +710,7 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
 
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -783,12 +738,8 @@ router.post(
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -813,7 +764,7 @@ router.post(
         var qtype3 = "Mcq-3";
         if (body) {
             if (file != null) {
-                console.log(req.body);
+
 
                 let quest = new Quest({
                     userid: user._id,
@@ -840,32 +791,6 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
-
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -892,12 +817,8 @@ router.post(
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -910,6 +831,12 @@ router.post(
         // }
     }
 );
+
+
+
+
+
+
 router.post(
     "/quest/create/mcq2",
     uploader.single("qmedia"),
@@ -922,7 +849,6 @@ router.post(
         var qtype2 = "Mcq-2";
         if (body) {
             if (file != null) {
-                console.log(req.body);
 
                 let quest = new Quest({
                     userid: user._id,
@@ -948,32 +874,7 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
 
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -999,12 +900,8 @@ router.post(
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -1017,12 +914,11 @@ router.post(
         // }
     }
 );
-/**
- * @description To update a post by the authenticated User
- * @api /posts/api/upadte-post
- * @access private
- * @type PUT
- */
+
+
+
+
+
 router.put(
     "/api/update-post/:id",
     userAuth,
@@ -1066,6 +962,8 @@ router.put(
 
 
 
+
+
 router.post(
     "/quest/create/blank",
     uploader.single("qmedia"),
@@ -1079,8 +977,6 @@ router.post(
 
         if (body) {
             if (file != null) {
-                console.log(req.body);
-
                 let quest = new Quest({
                     userid: user._id,
                     qtitle: body.qtitle,
@@ -1104,32 +1000,6 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
-
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                // console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -1154,12 +1024,8 @@ router.post(
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -1172,12 +1038,6 @@ router.post(
         // }
     }
 );
-/**
- * @description To like a post by authenticated user
- * @api /posts/api/like-post
- * @access private
- * @type PUT
- */
 
 
 

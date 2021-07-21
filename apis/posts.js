@@ -33,16 +33,17 @@ import { uploadPostImage as uploader } from "../middlewares/uploader.js";
 
 const router = Router();
 
-/**
- * @description To Upload Post Image
- * @api /posts/api/post-image-upload
- * @access private
- * @type POST
- */
+
+
+
+
+
+
+
 router.post(
     "/api/quests/upload",
     userAuth,
-    uploader.single("quest"),
+    uploader.single("qmedia"),
     async(req, res) => {
         try {
             let { file } = req;
@@ -61,26 +62,28 @@ router.post(
     }
 );
 
-/**
- * @description To create a new post by the authenticated User
- * @api /posts/api/create-post
- * @access private
- * @type POST
- */
+
+
+
+
+
+
+
+
 router.post(
     "/quest/create/mcq5",
-    uploader.single("qmedia"),
+
     userAuth,
+    uploader.single("qmedia"),
     async(req, res) => {
         // try {
         // Create a new Post
-        let { body, user, file } = req;
-        var image, image1 = "";
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "";
         var qtype5 = "Mcq-5";
         if (body) {
             if (!file) {
-                console.log(req.body);
-
                 let quest = new Quest({
                     userid: user._id,
                     qtitle: body.qtitle,
@@ -96,9 +99,10 @@ router.post(
                     qopt5: body.qopt5,
                     qans: body.qans,
                     qexp: body.qexp,
+                    qexpmedia: "",
                     qmedia: "noimage",
                     qstatus: "valid",
-                    qtitleslug: SlugGenerator(body.qtitle),
+                    qtitleslug: body.qtitle,
                 });
                 await quest.save();
                 return res.status(200).json({
@@ -108,32 +112,7 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
 
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -150,24 +129,23 @@ router.post(
                     qopt5: body.qopt5,
                     qans: body.qans,
                     qexp: body.qexp,
+                    qexpmedia: "",
                     qmedia: image,
                     qstatus: "valid",
-                    qtitleslug: SlugGenerator(body.qtitle),
+                    qtitleslug: body.qtitle,
                 });
                 await quest.save();
-                //   console.log("NEW_POST", post);
+
                 return res.status(201).json({
                     quest,
                     success: true,
                     message: "Your quest is published.",
                 });
+
             }
 
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -180,19 +158,34 @@ router.post(
         // }
     }
 );
+
+
+
+
+
+
+
+
+
+
 router.post(
     "/quest/create/mcq4",
-    uploader.single("qmedia"),
     userAuth,
+    uploader.single("qmedia"),
+
+    //  uploader.fields([{ name: 'qmedia', maxCount: 10 }, { name: 'explan', maxCount: 2 }]),
     async(req, res) => {
         // try {
         // Create a new Post
-        let { body, user, file } = req;
-        var image, image1 = "";
+        let { body, user, file, file1, files } = req;
+
+        //console.log(req.body, req.files, req.file.location, req.file.location);
+        var image = "",
+            image1 = "";
         var qtype4 = "Mcq-4";
         if (body) {
             if (!file) {
-                console.log(req.body);
+
 
                 let quest = new Quest({
                     userid: user._id,
@@ -208,9 +201,10 @@ router.post(
                     qopt4: body.qopt4,
                     qans: body.qans,
                     qexp: body.qexp,
+                    qexpmedia: "",
                     qmedia: "noimage",
                     qstatus: "valid",
-                    qtitleslug: SlugGenerator(body.qtitle),
+                    qtitleslug: body.qtitle,
                 });
                 await quest.save();
                 return res.status(200).json({
@@ -220,32 +214,6 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
-
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -261,24 +229,21 @@ router.post(
                     qopt4: body.qopt4,
                     qans: body.qans,
                     qexp: body.qexp,
+                    qexpmedia: "",
                     qmedia: image,
                     qstatus: "valid",
-                    qtitleslug: SlugGenerator(body.qtitle),
+                    qtitleslug: body.qtitle,
                 });
                 await quest.save();
-                //   console.log("NEW_POST", post);
+
                 return res.status(201).json({
                     quest,
                     success: true,
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -291,19 +256,30 @@ router.post(
         // }
     }
 );
+
+
+
+
+
+
+
+
+
+
+
 router.post(
     "/quest/create/mcq3",
-    uploader.single("qmedia"),
     userAuth,
+    uploader.single("qmedia"),
     async(req, res) => {
         // try {
         // Create a new Post
-        let { body, user, file } = req;
-        var image, image1 = "";
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "";
         var qtype3 = "Mcq-3";
         if (body) {
             if (!file) {
-                console.log(req.body);
 
                 let quest = new Quest({
                     userid: user._id,
@@ -318,9 +294,10 @@ router.post(
                     qopt3: body.qopt3,
                     qans: body.qans,
                     qexp: body.qexp,
+                    qexpmedia: "",
                     qmedia: "noimage",
                     qstatus: "valid",
-                    qtitleslug: SlugGenerator(body.qtitle),
+                    qtitleslug: body.qtitle,
                 });
                 await quest.save();
                 return res.status(200).json({
@@ -330,32 +307,6 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
-
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -370,24 +321,20 @@ router.post(
                     qopt3: body.qopt3,
                     qans: body.qans,
                     qexp: body.qexp,
+                    qexpmedia: "",
                     qmedia: image,
                     qstatus: "valid",
-                    qtitleslug: SlugGenerator(body.qtitle),
+                    qtitleslug: body.qtitle,
                 });
                 await quest.save();
-                //   console.log("NEW_POST", post);
                 return res.status(201).json({
                     quest,
                     success: true,
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -400,20 +347,29 @@ router.post(
         // }
     }
 );
+
+
+
+
+
+
+
+
+
+
 router.post(
     "/quest/create/mcq2",
-    uploader.single("qmedia"),
     userAuth,
+    uploader.single("qmedia"),
     async(req, res) => {
         // try {
         // Create a new Post
-        let { body, user, file } = req;
-        var image, image1 = "";
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "";
         var qtype2 = "Mcq-2";
         if (body) {
             if (!file) {
-                console.log(req.body);
-
                 let quest = new Quest({
                     userid: user._id,
                     qtitle: body.qtitle,
@@ -426,9 +382,11 @@ router.post(
                     qopt2: body.qopt2,
                     qans: body.qans,
                     qexp: body.qexp,
+
+                    qexpmedia: "",
                     qmedia: "noimage",
                     qstatus: "valid",
-                    qtitleslug: SlugGenerator(body.qtitle),
+                    qtitleslug: body.qtitle,
                 });
                 await quest.save();
                 return res.status(200).json({
@@ -438,32 +396,6 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
-
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -477,24 +409,20 @@ router.post(
                     qopt2: body.qopt2,
                     qans: body.qans,
                     qexp: body.qexp,
+                    qexpmedia: "",
                     qmedia: image,
                     qstatus: "valid",
-                    qtitleslug: SlugGenerator(body.qtitle),
+                    qtitleslug: body.qtitle,
                 });
                 await quest.save();
-                //   console.log("NEW_POST", post);
                 return res.status(201).json({
                     quest,
                     success: true,
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -507,25 +435,27 @@ router.post(
         // }
     }
 );
+
+
+
 
 
 
 
 router.post(
     "/quest/create/blank",
-    uploader.single("qmedia"),
     userAuth,
+    uploader.single("qmedia"),
     async(req, res) => {
         // try {
         // Create a new Post
-        let { body, user, file } = req;
-        var image, image1 = "";
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "";
         var qtype1 = "Blank";
 
         if (body) {
             if (!file) {
-                console.log(req.body);
-
                 let quest = new Quest({
                     userid: user._id,
                     qtitle: body.qtitle,
@@ -537,9 +467,10 @@ router.post(
                     qopt1: body.qopt1,
                     qans: body.qans,
                     qexp: body.qexp,
+                    qexpmedia: "",
                     qmedia: "noimage",
                     qstatus: "valid",
-                    qtitleslug: SlugGenerator(body.qtitle),
+                    qtitleslug: body.qtitle,
                 });
                 await quest.save();
                 return res.status(200).json({
@@ -549,32 +480,6 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
-
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -587,24 +492,20 @@ router.post(
                     qopt1: body.qopt1,
                     qans: body.qans,
                     qexp: body.qexp,
+                    qexpmedia: "",
                     qmedia: image,
                     qstatus: "valid",
-                    qtitleslug: SlugGenerator(body.qtitle),
+                    qtitleslug: body.qtitle,
                 });
                 await quest.save();
-                //   console.log("NEW_POST", post);
                 return res.status(201).json({
                     quest,
                     success: true,
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -617,12 +518,12 @@ router.post(
         // }
     }
 );
-/**
- * @description To like a post by authenticated user
- * @api /posts/api/like-post
- * @access private
- * @type PUT
- */
+
+
+
+
+
+
 router.put("/api/like-post/:id", userAuth, async(req, res) => {
     try {
         let { id } = req.params;

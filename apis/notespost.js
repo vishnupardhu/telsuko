@@ -37,12 +37,8 @@ import { uploadNoteImage as uploader } from "../middlewares/uploader.js";
 
 const router = Router();
 
-/**
- * @description To Upload Post Image
- * @api /posts/api/post-image-upload
- * @access private
- * @type POST
- */
+
+
 
 
 
@@ -96,6 +92,16 @@ router.post(
         // }
     }
 );
+
+
+
+
+
+
+
+
+
+
 router.post(
     "/create/notechapter",
     userAuth,
@@ -104,7 +110,7 @@ router.post(
         // try {
         // Create a new Post
         let { body, user, file } = req;
-        var notechapmedia = req.file.location;
+        var notechapmedia = "";
         if (body) {
             if (!file) {
                 let notechpters = new modelnoteschaps({
@@ -134,6 +140,7 @@ router.post(
                     message: "Your note chapter is published.",
                 });
             } else {
+                notechapmedia = req.file.location;
                 let notechpters = new modelnoteschaps({
                     userid: user._id,
                     nctitle: body.ntitle,
@@ -178,6 +185,14 @@ router.post(
 );
 
 
+
+
+
+
+
+
+
+
 router.post(
     "/publish/notes/statusupdate",
     userAuth,
@@ -220,6 +235,14 @@ router.post(
     // }
 
 );
+
+
+
+
+
+
+
+
 
 router.post("/api/quest/like", userAuth, async(req, res) => {
     // try {
@@ -343,15 +366,9 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     const response2 = {
                         message: "unlike updated",
                     };
-
-
                 });
-
         }
-
     }
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -359,6 +376,11 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
 
 router.post(
     "/comments",
@@ -375,7 +397,6 @@ router.post(
                 ncomment: body.ncomment,
                 ncommentstatus: "published",
             });
-
             await newcomment.save();
             await modelnotes.findOneAndUpdate({ _id: noteid }, {
                     $inc: {
@@ -400,10 +421,16 @@ router.post(
                 message: "Your comment not saved.",
             });
         }
-
-
     }
 );
+
+
+
+
+
+
+
+
 router.post(
     "/comment",
     userAuth,
@@ -441,10 +468,13 @@ router.post(
                 message: "Your comment not saved.",
             });
         }
-
-
     }
 );
+
+
+
+
+
 
 router.get(
     "/notes/likelist",
@@ -483,4 +513,7 @@ router.get(
         // }
     }
 );
+
+
+
 export default router;

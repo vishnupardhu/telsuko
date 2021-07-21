@@ -34,12 +34,10 @@ import { uploadPostImage as uploader } from "../middlewares/uploader.js";
 
 const router = Router();
 
-/**
- * @description To Upload Post Image
- * @api /posts/api/post-image-upload
- * @access private
- * @type POST
- */
+
+
+
+
 router.post(
     "/api/quests/upload",
     userAuth,
@@ -62,12 +60,15 @@ router.post(
     }
 );
 
-/**
- * @description To create a new post by the authenticated User
- * @api /posts/api/create-post
- * @access private
- * @type POST
- */
+
+
+
+
+
+
+
+
+
 router.post(
     "/quest/create/mcq5",
     uploader.single("qmedia"),
@@ -80,7 +81,6 @@ router.post(
         var qtype5 = "Mcq-5";
         if (body) {
             if (!file) {
-                console.log(req.body);
 
                 let quest = new Quest({
                     userid: user._id,
@@ -109,32 +109,6 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
-
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -165,10 +139,7 @@ router.post(
             }
 
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -181,6 +152,16 @@ router.post(
         // }
     }
 );
+
+
+
+
+
+
+
+
+
+
 router.post(
     "/quest/create/mcq4",
     uploader.single("qmedia"),
@@ -193,7 +174,6 @@ router.post(
         var qtype4 = "Mcq-4";
         if (body) {
             if (!file) {
-                console.log(req.body);
 
                 let quest = new Quest({
                     userid: user._id,
@@ -221,32 +201,7 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
 
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -292,6 +247,17 @@ router.post(
         // }
     }
 );
+
+
+
+
+
+
+
+
+
+
+
 router.post(
     "/quest/create/mcq3",
     uploader.single("qmedia"),
@@ -331,32 +297,7 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
 
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -401,6 +342,13 @@ router.post(
         // }
     }
 );
+
+
+
+
+
+
+
 router.post(
     "/quest/create/mcq2",
     uploader.single("qmedia"),
@@ -413,7 +361,6 @@ router.post(
         var qtype2 = "Mcq-2";
         if (body) {
             if (!file) {
-                console.log(req.body);
 
                 let quest = new Quest({
                     userid: user._id,
@@ -439,32 +386,7 @@ router.post(
                     message: "Your quest is published.",
                 });
             } else {
-                // let profile = await Profile.findOne({ account: user._id });
 
-                // if (profile) {
-
-                //     if (req.file != null && req.file.type.includes("qmedia")) {
-                //         image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
-                //         image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
-                //         // Read the file
-                //         fileSystem.readFile(req.file.path, function(err, data) {
-                //             if (err) throw err;
-                //             console.log('File read!');
-
-                //             // Write the file
-                //             fileSystem.writeFile(image, data, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File written!');
-                //             });
-
-                //             // Delete the file
-                //             fileSystem.unlink(req.file.path, function(err) {
-                //                 if (err) throw err;
-                //                 console.log('File deleted!');
-                //             });
-                //         });
-                //     }
-                console.log(req.body);
                 image = req.file.location;
                 let quest = new Quest({
                     userid: user._id,
@@ -490,12 +412,8 @@ router.post(
                     message: "Your quest is published.",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -508,12 +426,15 @@ router.post(
         // }
     }
 );
-/**
- * @description To update a post by the authenticated User
- * @api /posts/api/upadte-post
- * @access private
- * @type PUT
- */
+
+
+
+
+
+
+
+
+
 router.put(
     "/api/update-post/:id",
     userAuth,
@@ -554,6 +475,15 @@ router.put(
         }
     }
 );
+
+
+
+
+
+
+
+
+
 router.post("/api/quest/getanswerresponse", userAuth,
     async(req, res) => {
         // try {
@@ -578,12 +508,8 @@ router.post("/api/quest/getanswerresponse", userAuth,
                     message: "Your have answered it",
                 });
             }
-
         } else {
-
-
             return res.status(400).json({
-
                 success: false,
                 message: "please fill the fields",
             });
@@ -596,6 +522,11 @@ router.post("/api/quest/getanswerresponse", userAuth,
         // }
     }
 );
+
+
+
+
+
 
 
 router.post("/api/quest/singlefetch", userAuth, async(req, res) => {
@@ -625,11 +556,8 @@ router.post("/api/quest/singlefetch", userAuth, async(req, res) => {
                 const response = {
                     message: "view updated",
                 };
-
-
             });
     }
-
     return res.status(201).json({
         questsin,
         succcess: true,
@@ -641,6 +569,15 @@ router.post("/api/quest/singlefetch", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
 
 
 router.post("/api/quest/like", userAuth, async(req, res) => {
@@ -765,15 +702,9 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
                     const response2 = {
                         message: "unlike updated",
                     };
-
-
                 });
-
         }
-
     }
-
-
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -781,6 +712,12 @@ router.post("/api/quest/like", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
 
 
 router.post("/api/quest/view", userAuth, async(req, res) => {
@@ -821,6 +758,13 @@ router.post("/api/quest/view", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
 router.get("/api/questy", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -845,6 +789,16 @@ router.get("/api/questy", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
+
 router.get("/myquests", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -871,6 +825,18 @@ router.get("/myquests", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
+
+
+
 router.get("/api/quest", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -897,8 +863,11 @@ router.get("/api/quest", userAuth, async(req, res) => {
     //     });
     // }
 });
-//db.inventory.find( { $or: [ { quantity: { $lt: 20 } }, { price: 10 } ] } )
-//{$match: { $or: [{ 'title': { $regex:  request.query.val, $options: 'i'} }, { 'skills_required': { $regex:  request.query.val, $options: 'i'} }] }},
+
+
+
+
+
 router.get("/search/:searchtext", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -949,6 +918,12 @@ router.get("/search/:searchtext", userAuth, async(req, res) => {
     // }
 });
 
+
+
+
+
+
+
 router.get("/quests", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -998,6 +973,14 @@ router.get("/quests", userAuth, async(req, res) => {
 });
 
 
+
+
+
+
+
+
+
+
 router.put("/api/like-post/:id", userAuth, async(req, res) => {
     try {
         let { id } = req.params;
@@ -1034,6 +1017,16 @@ router.put("/api/like-post/:id", userAuth, async(req, res) => {
         });
     }
 });
+
+
+
+
+
+
+
+
+
+
 router.get(
     "/quest/fetch/comments/:questid",
     userAuth,
@@ -1064,6 +1057,14 @@ router.get(
 
     }
 );
+
+
+
+
+
+
+
+
 
 
 router.get("/myposts", userAuth, async(req, res) => {
@@ -1191,7 +1192,6 @@ router.get("/myposts", userAuth, async(req, res) => {
             limit: limit
         }
     }
-
 
     let topics = await modelnoteschaps.find({ userid: myuserid }).populate('notesref').populate("userid", "profileid").populate({
         path: 'userid',

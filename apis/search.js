@@ -32,8 +32,14 @@ import { uploadPostImage as uploader } from "../middlewares/uploader.js";
 const router = Router();
 
 
-//db.inventory.find( { $or: [ { quantity: { $lt: 20 } }, { price: 10 } ] } )
-//{$match: { $or: [{ 'title': { $regex:  request.query.val, $options: 'i'} }, { 'skills_required': { $regex:  request.query.val, $options: 'i'} }] }},
+
+
+
+
+
+
+
+
 router.get("/:searchtext", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -67,31 +73,6 @@ router.get("/:searchtext", userAuth, async(req, res) => {
         populate: { path: 'profileid', select: 'name avatar ispopular' }
     }).sort({ "createdAt": -1 }).limit(limit).skip(startIndex).exec();
 
-
-    // const startIndexstory = (page - 1) * limit
-    // const endIndexstory = page * limit
-    // const resultsstory = {}
-    // if (endIndexstory < await modelstories.countDocuments().exec()) {
-    //     resultsstory.next = {
-    //         page: page + 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // if (startIndexstory > 0) {
-    //     resultsstory.previous = {
-    //         page: page - 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // let storie = await modelstories.find({ $or: [{ storytitle: regexv }, { storygenere: regexv }, { storydescriptions: regexv }, { storysubgenere: regexv }, { storymentions: regexv }] }).populate("userid", "profileid").populate({
-    //     path: 'userid',
-    //     select: 'profileid',
-    //     populate: { path: 'profileid', select: 'name avatar ispopular' }
-    // }).sort({ "createdAt": -1 }).limit(limit).skip(startIndexstory).exec();
-
-
     const startIndexstorychap = (page - 1) * limit
     const endIndexstorychap = page * limit
     const resultsstorychap = {}
@@ -114,30 +95,6 @@ router.get("/:searchtext", userAuth, async(req, res) => {
         select: 'profileid',
         populate: { path: 'profileid', select: 'name avatar ispopular' }
     }).sort({ "createdAt": -1 }).limit(limit).skip(startIndexstorychap).exec();
-
-
-    // const startIndextopic = (page - 1) * limit
-    // const endIndextopic = page * limit
-    // const resultstopic = {}
-    // if (endIndextopic < await modelnotes.countDocuments().exec()) {
-    //     resultstopic.next = {
-    //         page: page + 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // if (startIndextopic > 0) {
-    //     resultstopic.previous = {
-    //         page: page - 1,
-    //         limit: limit
-    //     }
-    // }
-
-    // let topic = await modelnotes.find({ $or: [{ ntitle: regexv }, { ncat: regexv }, { nsub: regexv }, { ndescriptions: regexv }, { nabout: regexv }] }).populate("userid", "profileid").populate({
-    //     path: 'userid',
-    //     select: 'profileid',
-    //     populate: { path: 'profileid', select: 'name avatar ispopular' }
-    // }).sort({ "createdAt": -1 }).limit(limit).skip(startIndextopic).exec();
 
 
     const startIndextopicvol = (page - 1) * limit
@@ -214,6 +171,13 @@ router.get("/:searchtext", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
 
 
 router.get("/myposts", userAuth, async(req, res) => {
@@ -401,6 +365,15 @@ router.get("/myposts", userAuth, async(req, res) => {
 });
 
 
+
+
+
+
+
+
+
+
+
 router.get("/yourposts/:userid", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -535,16 +508,12 @@ router.get("/yourposts/:userid", userAuth, async(req, res) => {
     const startIndextest = (page - 1) * limit
     const endIndextest = page * limit
     const resultstest = {}
-
-
-
     if (endIndextest < await modelsections.countDocuments().exec()) {
         resultstest.next = {
             page: page + 1,
             limit: limit
         }
     }
-
     if (startIndextest > 0) {
         resultstest.previous = {
             page: page - 1,
@@ -581,6 +550,16 @@ router.get("/yourposts/:userid", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
+
+
+
+
 router.get("/quests", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -597,14 +576,12 @@ router.get("/quests", userAuth, async(req, res) => {
             limit: limit
         }
     }
-
     if (startIndex > 0) {
         results.previous = {
             page: page - 1,
             limit: limit
         }
     }
-
     let quests = await Quest.find().populate("userid", "profileid").populate({
         path: 'userid',
         select: 'profileid',
@@ -628,6 +605,12 @@ router.get("/quests", userAuth, async(req, res) => {
     //     });
     // }
 });
+
+
+
+
+
+
 router.put("/api/like-post/:id", userAuth, async(req, res) => {
     try {
         let { id } = req.params;
@@ -638,7 +621,6 @@ router.put("/api/like-post/:id", userAuth, async(req, res) => {
                 message: "Post not found.",
             });
         }
-
         let user = post.likes.user.map((id) => id.toString());
         if (user.includes(req.user._id.toString())) {
             return res.status(404).json({
@@ -646,7 +628,6 @@ router.put("/api/like-post/:id", userAuth, async(req, res) => {
                 message: "You have already liked this post.",
             });
         }
-
         post = await Post.findOneAndUpdate({ _id: id }, {
             likes: {
                 count: post.likes.count + 1,
@@ -664,6 +645,16 @@ router.put("/api/like-post/:id", userAuth, async(req, res) => {
         });
     }
 });
+
+
+
+
+
+
+
+
+
+
 router.get(
     "/quest/fetch/comments/:questid",
     userAuth,
@@ -688,10 +679,7 @@ router.get(
                 success: true,
                 message: "Your comment found.",
             });
-
         }
-
-
     }
 );
 export default router;

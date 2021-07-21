@@ -1,6 +1,5 @@
 import passport from "passport";
 import { Strategy, ExtractJwt } from "passport-jwt";
-
 const User = require('../models/User');
 const secretOrKey = require('../constants/index');
 
