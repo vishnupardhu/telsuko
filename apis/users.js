@@ -3,7 +3,8 @@ import {
     RegisterValidations,
     AuthenticateValidations,
 } from "../validators/index.js";
-import { join } from "path";
+import path from 'path';
+
 import User from "../models/User.js";
 import { Router } from "express";
 import bcryptjs from "bcryptjs";
@@ -12,7 +13,7 @@ import { DOMAIN } from "../constants/index.js";
 import sendMail from "../functions/email-sender.js";
 import { userAuth } from "../middlewares/auth-guard.js";
 import Validator from "../middlewares/validator-middleware.js";
-
+const __dirname = path.resolve();
 const router = Router();
 
 
@@ -71,7 +72,7 @@ router.post(
         );
         return res.status(201).json({
             success: true,
-            message: "Hurray! your account is created please verify your email address.",
+            message: "Hurray! your account is created \nplease verify your email address.",
         });
         // } catch (err) {
         //     return res.status(500).json({
@@ -663,19 +664,19 @@ router.post(
         <tr align="center" style="vertical-align: top; display: inline-block; text-align: center;" valign="top">
         <td >
         <a href="
-        https://www.facebook.com/IAmTelsuko" class="fa fa-facebook"></a></td>
+        https://www.facebook.com/IAmTelsuko" class="fa fa-facebook">facebook</a></td>
         <td >
         <a href="
-        https://twitter.com/IAmTelsuko" class="fa fa-twitter"></a>
+        https://twitter.com/IAmTelsuko" class="fa fa-twitter">twitter</a>
         </td>
         <td >
-        <a href="https://www.youtube.com/channel/UCmZ-Gc8yoKeLyIHbt162Z8w" class="fa fa-youtube"></a>
+        <a href="https://www.youtube.com/channel/UCmZ-Gc8yoKeLyIHbt162Z8w" class="fa fa-youtube">youtube</a>
         </td>
         <td >
-        <a href="www.linkedin.com/in/telsuko" class="fa fa-linkedin"></a>
+        <a href="www.linkedin.com/in/telsuko" class="fa fa-linkedin">linkedin</a>
         </td>
         <td >
-        <a href="https://www.instagram.com/iamtelsuko/" class="fa fa-instagram"></a>
+        <a href="https://www.instagram.com/iamtelsuko/" class="fa fa-instagram">instagram</a>
         </td>
         </tr>
         </tbody>
@@ -849,7 +850,7 @@ router.get("/checkprofilestatus/:_id", async(req, res) => {
 router.get("/verify-now/:verificationCode", async(req, res) => {
     try {
         let { verificationCode } = req.params;
-        let user = await User.findOne({ verificationCode });
+        let user = await User.findOne({ verificationCode: verificationCode });
 
         if (!user) {
             return res.status(401).json({
@@ -860,12 +861,10 @@ router.get("/verify-now/:verificationCode", async(req, res) => {
         user.verified = true;
         user.verificationCode = undefined;
         await user.save();
-        return res.sendFile(
-            join(__dirname, "../templates/verification-success.html")
-        );
+        return res.sendFile(path.join(__dirname, "./templates/verification-success.html"));
     } catch (err) {
         console.log("ERR", err.message);
-        return res.sendFile(join(__dirname, "../templates/errors.html"));
+        return res.sendFile(path.join(__dirname, "./templates/errors.html"));
     }
 });
 
@@ -1567,19 +1566,19 @@ router.post(
             <tr align="center" style="vertical-align: top; display: inline-block; text-align: center;" valign="top">
             <td >
             <a href="
-            https://www.facebook.com/IAmTelsuko" class="fa fa-facebook"></a></td>
+            https://www.facebook.com/IAmTelsuko" class="fa fa-facebook"></a>facebook</td>
             <td >
             <a href="
-            https://twitter.com/IAmTelsuko" class="fa fa-twitter"></a>
+            https://twitter.com/IAmTelsuko" class="fa fa-twitter">twitter</a>
             </td>
             <td >
-            <a href="https://www.youtube.com/channel/UCmZ-Gc8yoKeLyIHbt162Z8w" class="fa fa-youtube"></a>
+            <a href="https://www.youtube.com/channel/UCmZ-Gc8yoKeLyIHbt162Z8w" class="fa fa-youtube">youtube</a>
             </td>
             <td >
-            <a href="www.linkedin.com/in/telsuko" class="fa fa-linkedin"></a>
+            <a href="www.linkedin.com/in/telsuko" class="fa fa-linkedin">linkedin</a>
             </td>
             <td >
-            <a href="https://www.instagram.com/iamtelsuko/" class="fa fa-instagram"></a>
+            <a href="https://www.instagram.com/iamtelsuko/" class="fa fa-instagram">instagram</a>
             </td>
             </tr>
             </tbody>
@@ -1699,9 +1698,9 @@ router.get("/reset-password-now/:resetPasswordToken", async(req, res) => {
                 message: "Password reset token is invalid or has expired.",
             });
         }
-        return res.sendFile(join(__dirname, "../templates/password-reset.html"));
+        return res.sendFile(path.join(__dirname, "./templates/password-reset.html"));
     } catch (err) {
-        return res.sendFile(join(__dirname, "../templates/errors.html"));
+        return res.sendFile(path.join(__dirname, "./templates/errors.html"));
     }
 });
 
