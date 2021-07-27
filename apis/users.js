@@ -794,7 +794,7 @@ router.get("/checkusername/:username", async(req, res) => {
         });
     } catch (err) {
         console.log("ERR", err.message);
-        //return res.sendFile(path.join(__dirname, "../templates/errors.html"));
+        //return res.sendFile(path.join(__dirname, "./templates/errors.html"));
     }
 });
 
@@ -813,7 +813,7 @@ router.get("/checkuseremail/:email", async(req, res) => {
         });
     } catch (err) {
         console.log("ERR", err.message);
-        //return res.sendFile(path.join(__dirname, "../templates/errors.html"));
+        //return res.sendFile(path.join(__dirname, "./templates/errors.html"));
     }
 });
 router.get("/checkprofilestatus/:_id", async(req, res) => {
@@ -831,7 +831,7 @@ router.get("/checkprofilestatus/:_id", async(req, res) => {
         });
     } catch (err) {
         console.log("ERR", err.message);
-        //return res.sendFile(path.join(__dirname, "../templates/errors.html"));
+        //return res.sendFile(path.join(__dirname, "./templates/errors.html"));
     }
 });
 /**
@@ -855,11 +855,11 @@ router.get("/verify-now/:verificationCode", async(req, res) => {
         user.verificationCode = undefined;
         await user.save();
         return res.sendFile(
-            path.join(__dirname, "../templates/verification-success.html")
+            path.join(__dirname, "./telsuko/templates/verification-success.html")
         );
     } catch (err) {
         console.log("ERR", err.message);
-        return res.sendFile(path.join(__dirname, "../templates/errors.html"));
+        return res.sendFile(path.join(__dirname, "./telsuko/templates/errors.html"));
     }
 });
 
@@ -1725,9 +1725,9 @@ router.get("/reset-password-now/:resetPasswordToken", async(req, res) => {
                 message: "Password reset token is invalid or has expired.",
             });
         }
-        return res.sendFile(path.join(__dirname, "../templates/password-reset.html"));
+        return res.sendFile(path.join(__dirname, "./templates/password-reset.html"));
     } catch (err) {
-        return res.sendFile(path.join(__dirname, "../templates/errors.html"));
+        return res.sendFile(path.join(__dirname, "./templates/errors.html"));
     }
 });
 
