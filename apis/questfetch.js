@@ -41,7 +41,7 @@ const router = Router();
 router.post(
     "/api/quests/upload",
     userAuth,
-    uploader.single("quest"),
+    uploader,
     async(req, res) => {
         try {
             let { file } = req;
@@ -71,7 +71,7 @@ router.post(
 
 router.post(
     "/quest/create/mcq5",
-    uploader.single("qmedia"),
+    uploader,
     userAuth,
     async(req, res) => {
         // try {
@@ -164,7 +164,7 @@ router.post(
 
 router.post(
     "/quest/create/mcq4",
-    uploader.single("qmedia"),
+    uploader,
     userAuth,
     async(req, res) => {
         // try {
@@ -260,7 +260,7 @@ router.post(
 
 router.post(
     "/quest/create/mcq3",
-    uploader.single("qmedia"),
+    uploader,
     userAuth,
     async(req, res) => {
         // try {
@@ -351,7 +351,7 @@ router.post(
 
 router.post(
     "/quest/create/mcq2",
-    uploader.single("qmedia"),
+    uploader,
     userAuth,
     async(req, res) => {
         // try {

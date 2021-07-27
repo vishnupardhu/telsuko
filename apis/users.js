@@ -24,9 +24,12 @@ const router = Router();
 
 
 
-
-
-
+/**
+ * @description To create a new User Account
+ * @api /users/api/register
+ * @access Public
+ * @type POST
+ */
 router.post(
     "/api/register",
     RegisterValidations,
@@ -51,7 +54,10 @@ router.post(
             });
         }
         let usernew = new User({
-
+            // name: req.body.name,
+            // username: req.body.username,
+            // email: req.body.email,
+            // password: req.body.password,
             ...req.body,
             verificationCode: randomBytes(20).toString("hex"),
         });
@@ -72,7 +78,7 @@ router.post(
         );
         return res.status(201).json({
             success: true,
-            message: "Hurray! your account is created \nplease verify your email address.",
+            message: "Hurray! your account is created please verify your email address.",
         });
         // } catch (err) {
         //     return res.status(500).json({
@@ -82,16 +88,6 @@ router.post(
         // }
     }
 );
-
-
-
-
-
-
-
-
-
-
 
 router.post(
     "/api/register/signup",
@@ -118,7 +114,10 @@ router.post(
             });
         }
         let usernew = new User({
-
+            // name: req.body.name,
+            // username: req.body.username,
+            // email: req.body.email,
+            // password: req.body.password,
             ...req.body,
             verificationCode: randomBytes(20).toString("hex"),
         });
@@ -795,13 +794,9 @@ router.get("/checkusername/:username", async(req, res) => {
         });
     } catch (err) {
         console.log("ERR", err.message);
-
+        //return res.sendFile(path.join(__dirname, "../templates/errors.html"));
     }
 });
-
-
-
-
 
 router.get("/checkuseremail/:email", async(req, res) => {
     try {
@@ -818,13 +813,9 @@ router.get("/checkuseremail/:email", async(req, res) => {
         });
     } catch (err) {
         console.log("ERR", err.message);
-        //return res.sendFile(join(__dirname, "../templates/errors.html"));
+        //return res.sendFile(path.join(__dirname, "../templates/errors.html"));
     }
 });
-
-
-
-
 router.get("/checkprofilestatus/:_id", async(req, res) => {
     try {
         User.findOne({ _id: req.params.profileid }, (err, result) => {
@@ -840,13 +831,15 @@ router.get("/checkprofilestatus/:_id", async(req, res) => {
         });
     } catch (err) {
         console.log("ERR", err.message);
-
+        //return res.sendFile(path.join(__dirname, "../templates/errors.html"));
     }
 });
-
-
-
-
+/**
+ * @description To verify a new user's account via email
+ * @api /users/verify-now/:verificationCode
+ * @access PUBLIC <Only Via email>
+ * @type GET
+ */
 router.get("/verify-now/:verificationCode", async(req, res) => {
     try {
         let { verificationCode } = req.params;
@@ -861,17 +854,21 @@ router.get("/verify-now/:verificationCode", async(req, res) => {
         user.verified = true;
         user.verificationCode = undefined;
         await user.save();
-        return res.sendFile(path.join(__dirname, "./templates/verification-success.html"));
+        return res.sendFile(
+            path.join(__dirname, "../templates/verification-success.html")
+        );
     } catch (err) {
         console.log("ERR", err.message);
-        return res.sendFile(path.join(__dirname, "./templates/errors.html"));
+        return res.sendFile(path.join(__dirname, "../templates/errors.html"));
     }
 });
 
-
-
-
-
+/**
+ * @description To authenticate an user and get auth token
+ * @api /users/api/authenticate
+ * @access PUBLIC
+ * @type POST
+ */
 router.post(
     "/api/login",
     AuthenticateValidations,
@@ -888,10 +885,32 @@ router.post(
                     return res.status(403).json("Email incorrect or may not Exists");
                 }
                 if (!(result.verified === isverified)) {
-
+                    // here we implement the JWT token functionality
                     res.status(403).json("Your Email is not verified ..Please verify it");
                 } else {
+                    // if (await result.password===  paassword) {
+                    //   let token = await user.generateJWT();
 
+                    //   if (!(result.isProfileverified === isverified)) {
+                    //     return res.status(401).json({
+
+                    //       success: false,
+                    //       user: user.getUserInfo(),
+                    //       token: `Bearer ${token}`,
+                    //       message: "welcome...!",
+                    //     });
+                    //   }else{
+                    //     return res.status(201).json({
+                    //       success: false,
+                    //       user: user.getUserInfo(),
+                    //       token: `Bearer ${token}`,
+                    //       message: "logged in",
+                    //     });
+                    //   }
+
+                    // } else {
+                    //   res.status(401).json("password is incorrect");
+                    // }
                     compare(req.body.password, result.password, (err, isMatch) => {
                         if (err) throw err;
                         if (isMatch) {
@@ -900,14 +919,14 @@ router.post(
                                 return res.status(401).json({
 
                                     success: false,
-
+                                    // user: user.getUserInfo(),
                                     token: `Bearer ${token}`,
                                     message: "welcome...!",
                                 });
                             } else {
                                 return res.status(201).json({
                                     success: false,
-
+                                    // user: user.getUserInfo(),
                                     token: `Bearer ${token}`,
                                     message: "logged in",
                                 });
@@ -993,10 +1012,12 @@ router.post(
     }
 );
 
-
-
-
-
+/**
+ * @description To get the authenticated user's profile
+ * @api /users/api/authenticate
+ * @access Private
+ * @type GET
+ */
 router.get("/api/authenticate", userAuth, async(req, res) => {
     return res.status(200).json({
         user: req.user,
@@ -1004,9 +1025,12 @@ router.get("/api/authenticate", userAuth, async(req, res) => {
     });
 });
 
-
-
-
+/**
+ * @description To initiate the password reset process
+ * @api /users/api/reset-password
+ * @access Public
+ * @type POST
+ */
 
 router.post(
     "/api/reset-password",
@@ -1566,7 +1590,7 @@ router.post(
             <tr align="center" style="vertical-align: top; display: inline-block; text-align: center;" valign="top">
             <td >
             <a href="
-            https://www.facebook.com/IAmTelsuko" class="fa fa-facebook"></a>facebook</td>
+            https://www.facebook.com/IAmTelsuko" class="fa fa-facebook">facebook</a></td>
             <td >
             <a href="
             https://twitter.com/IAmTelsuko" class="fa fa-twitter">twitter</a>
@@ -1682,9 +1706,12 @@ router.post(
     }
 );
 
-
-
-
+/**
+ * @description To resnder reset password page
+ * @api /users/reset-password/:resetPasswordToken
+ * @access Restricted via email
+ * @type GET
+ */
 router.get("/reset-password-now/:resetPasswordToken", async(req, res) => {
     try {
         let { resetPasswordToken } = req.params;
@@ -1698,15 +1725,18 @@ router.get("/reset-password-now/:resetPasswordToken", async(req, res) => {
                 message: "Password reset token is invalid or has expired.",
             });
         }
-        return res.sendFile(path.join(__dirname, "./templates/password-reset.html"));
+        return res.sendFile(path.join(__dirname, "../templates/password-reset.html"));
     } catch (err) {
-        return res.sendFile(path.join(__dirname, "./templates/errors.html"));
+        return res.sendFile(path.join(__dirname, "../templates/errors.html"));
     }
 });
 
-
-
-
+/**
+ * @description To reset the password
+ * @api /users/api/reset-password-now
+ * @access Restricted via email
+ * @type POST
+ */
 router.post("/api/reset-password-now", async(req, res) => {
     try {
         let { resetPasswordToken, password } = req.body;

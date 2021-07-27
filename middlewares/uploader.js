@@ -15,7 +15,6 @@ const s3 = new aws.S3({
 });
 
 
-
 export const uploadviss3 = multer({
     storage: multerS3({
         s3: s3,
@@ -134,7 +133,6 @@ var storage = multer.diskStorage({
         } else if (file.fieldname === 'coverpic') {
             cd(null, `${__dirname}/../uploads/profiles/coverpic`);
         }
-
     },
 
     filename: function(req, file, cd) {
@@ -246,7 +244,80 @@ export var uploadvis = multer({
         },
     }),
 });
+// export const uploadPostImage = multer({
+//     storage: multerS3({
+//         s3: s3,
+//         bucket: "mytheory",
+//         acl: "public-read",
+//         metadata: function(req, file, cb) {
+//             cb(null, { fieldName: file.fieldname });
+//         },
+//         key: function(req, file, cb) {
+//             let _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
+//             let lastIndexof = file.originalname.lastIndexOf(".");
+//             let ext = file.originalname.substring(lastIndexof);
+//             cb(null, `post-${Date.now().toString(36) + Math.random().toString(36).slice(2)}${Date.now()}${ext}`);
+//         },
+//     }),
+// });
+
 export const uploadPostImage = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: "mytheory",
+        acl: "public-read",
+        metadata: function(req, file, cb) {
+
+            if (file.fieldname === "qmedia") {
+                cb(null, { fieldName: file.fieldname });
+            } else if (file.fieldname === "emedia") {
+                cb(null, { fieldName: file.fieldname });
+            }
+
+        },
+        key: function(req, file, cb) {
+            let _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
+            let lastIndexof = file.originalname.lastIndexOf(".");
+            let ext = file.originalname.substring(lastIndexof);
+            if (file.fieldname === "qmedia") {
+                cb(null, `post-${Date.now().toString(36) + Math.random().toString(36).slice(2)}${Date.now()}${ext}`);
+            } else if (file.fieldname === "emedia") {
+                cb(null, `post-${Date.now().toString(36) + Math.random().toString(36).slice(2)}${Date.now()}${ext}`);
+            }
+        },
+    }),
+}).fields(
+    [{
+            name: 'qmedia',
+            maxCount: 1
+        },
+        {
+            name: 'emedia',
+            maxCount: 1
+        },
+
+    ]
+);
+
+export const uploadquestmedia = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: "mytheory",
+        acl: "public-read",
+        metadata: function(req, file, cb) {
+            cb(null, { fieldName: file.fieldname });
+        },
+        key: function(req, file, cb) {
+            let _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
+            let lastIndexof = file.originalname.lastIndexOf(".");
+            let ext = file.originalname.substring(lastIndexof);
+            cb(null, `post-${Date.now().toString(36) + Math.random().toString(36).slice(2)}${Date.now()}${ext}`);
+        },
+    }),
+});
+
+
+export const uploadexplanmedia = multer({
     storage: multerS3({
         s3: s3,
         bucket: "mytheory",

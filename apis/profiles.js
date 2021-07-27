@@ -40,7 +40,7 @@ import validator from "../middlewares/validator-middleware.js";
 const router = Router();
 
 
-
+var cpUpload = uploadvis.fields([{ name: 'avatar', maxCount: 1 }, { name: 'coverpic', maxCount: 1 }]);
 
 router.patch(
     "/api/create-profile",
@@ -91,11 +91,101 @@ router.patch(
             messgae: "Profile created successfully.",
         });
 
+
+        //     await User.findOneAndUpdate({ _id: user._id }, {
+
+        //         isprofileverified = true,
+
+        //     },
+        //     (err, data) => {
+        //         if (err) return res.status(500).send(err);
+        //         const response = {
+        //             message: "profile updated successfully",
+
+
+        //         };
+        //         return res.status(200).send(response);
+        //     }
+        // );
+
+        // } catch (err) {
+        //     return res.status(400).json({
+        //         success: false,
+        //         messgae: "Unable to create your profile.",
+        //     });
+        // }
     }
 );
 
 
 
+// router.post(
+//     "/quest/create",
+//     userAuth,
+//     uploadProfileAvatar.single("qmedia"),
+//     async(req, res) => {
+//         // try {
+//         // Create a new Post
+//         let { body, user, file } = req;
+//         var image, image1 = "";
+//         let profile = await Profile.findOne({ account: user._id });
+
+//         if (profile) {
+
+//             if (req.files != null && uploadProfileAvatar.single("qmedia")) {
+//                 image = "uploads/quests/" + new Date().getTime() + "-" + req.file.name;
+//                 image1 = DOMAIN + "/" + new Date().getTime() + "-" + req.file.name;
+//                 // Read the file
+//                 fileSystem.readFile(req.file.path, function(err, data) {
+//                     if (err) throw err;
+//                     console.log('File read!');
+
+//                     // Write the file
+//                     fileSystem.writeFile(image, data, function(err) {
+//                         if (err) throw err;
+//                         console.log('File written!');
+//                     });
+
+//                     // Delete the file
+//                     fileSystem.unlink(req.file.path, function(err) {
+//                         if (err) throw err;
+//                         console.log('File deleted!');
+//                     });
+//                 });
+//             }
+//             console.log(file.fil);
+
+//             // let quest = new Quest({
+//             //     userid: user._id,
+//             //     qtitle: body.qtitle,
+//             //     qcategory: body.qcategory,
+//             //     qtype: body.qtype,
+//             //     qpositive: body.qpositive,
+//             //     qnegative: body.qnegative,
+//             //     qopt1: body.qopt1,
+//             //     qans: body.qans,
+//             //     qexp: body.qexp,
+//             //     qmedia: image1,
+//             //     qstatus: "valid",
+//             //     qtitleslug: body.qtitle,
+//             // });
+//             // await quest.save();
+//             //   console.log("NEW_POST", post);
+//             return res.status(201).json({
+//                 //quest,
+//                 body,
+//                 success: true,
+//                 message: "Your quest is published.",
+//             });
+//         }
+//         // } catch (err) {
+//         //     return res.status(400).json({
+//         //         success: false,
+//         //         message: "Unable to create the quest.",
+//         //     });
+//         // }
+//     }
+// );
 router.post(
     "/api/create-profile",
     userAuth,
@@ -160,10 +250,31 @@ router.post(
             messgae: "Profile created successfully.",
         });
 
+
+        //     await User.findOneAndUpdate({ _id: user._id }, {
+
+        //         isprofileverified = true,
+
+        //     },
+        //     (err, data) => {
+        //         if (err) return res.status(500).send(err);
+        //         const response = {
+        //             message: "profile updated successfully",
+
+
+        //         };
+        //         return res.status(200).send(response);
+        //     }
+        // );
+
+        // } catch (err) {
+        //     return res.status(400).json({
+        //         success: false,
+        //         messgae: "Unable to create your profile.",
+        //     });
+        // }
     }
 );
-
-
 
 
 
@@ -236,12 +347,31 @@ router.post(
             messgae: "Profile created successfully.",
         });
 
+
+        //     await User.findOneAndUpdate({ _id: user._id }, {
+
+        //         isprofileverified = true,
+
+        //     },
+        //     (err, data) => {
+        //         if (err) return res.status(500).send(err);
+        //         const response = {
+        //             message: "profile updated successfully",
+
+
+        //         };
+        //         return res.status(200).send(response);
+        //     }
+        // );
+
+        // } catch (err) {
+        //     return res.status(400).json({
+        //         success: false,
+        //         messgae: "Unable to create your profile.",
+        //     });
+        // }
     }
 );
-
-
-
-
 
 router.put(
     "/api/update-profile-status",
@@ -264,11 +394,6 @@ router.put(
         }
     }
 );
-
-
-
-
-
 router.post("/addprofileimage", userAuth,
     uploadProfileAvatars3.single("avatar"), async(req, res) => {
         let { user, file } = req;
@@ -291,11 +416,6 @@ router.post("/addprofileimage", userAuth,
         );
     });
 
-
-
-
-
-
 router.patch("/addprofileimage", userAuth,
     uploadProfileAvatars3.single("avatar"), async(req, res) => {
         let { user, file } = req;
@@ -317,12 +437,6 @@ router.patch("/addprofileimage", userAuth,
             }
         );
     });
-
-
-
-
-
-
 router.patch("/addcoverimage", userAuth,
     uploadProfileAvatars3.single("coverpic"), (req, res) => {
         let { user, file } = req;
@@ -347,11 +461,6 @@ router.patch("/addcoverimage", userAuth,
         );
     });
 
-
-
-
-
-
 router.get("/checkProfile", userAuth, (req, res) => {
     let { user, file } = req;
     Profile.findOne({ account: user._id }, (err, result) => {
@@ -371,11 +480,12 @@ router.get("/checkProfile", userAuth, (req, res) => {
         }
     });
 });
-
-
-
-
-
+/**
+ * @description To Get the authenticated user's profile
+ * @api /profiles/api/my-profile
+ * @access Private
+ * @type GET
+ */
 router.get("/api/my-profile", userAuth, async(req, res) => {
     try {
         let profile = await Profile.findOne({ account: req.user._id }).populate(
@@ -414,9 +524,6 @@ router.get("/api/my-profile", userAuth, async(req, res) => {
 
 
 
-
-
-
 router.get("/api/userprofile", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -431,6 +538,7 @@ router.get("/api/userprofile", userAuth, async(req, res) => {
     let testc = await modelsections.findOne({ userid: userprofileid }).countDocuments().exec();
     let topicsc = await modelnoteschaps.findOne({ userid: userprofileid }).countDocuments().exec();
     let storyc = await modelstorychaps.findOne({ userid: userprofileid }).countDocuments().exec();
+
     if (!profile) {
         return res.status(404).json({
             success: false,
@@ -484,13 +592,6 @@ router.get("/api/quest", userAuth, async(req, res) => {
     //     });
     // }
 });
-
-
-
-
-
-
-
 router.post("/apigg/userprofile", userAuth, async(req, res) => {
     // try {
     let { user, file } = req;
@@ -515,10 +616,6 @@ router.post("/apigg/userprofile", userAuth, async(req, res) => {
     //     });
     // }
 });
-
-
-
-
 
 
 router.post("/get/userprofile", userAuth, async(req, res) => {
@@ -558,13 +655,12 @@ router.post("/get/userprofile", userAuth, async(req, res) => {
     // }
 });
 
-
-
-
-
-
-
-
+/**
+ * @description To update autheticated user's profile
+ * @type PUT <multipart-form> request
+ * @api /profiles/api/update-profile
+ * @access Private
+ */
 router.put(
     "/api/update-profile",
     userAuth,
@@ -572,8 +668,8 @@ router.put(
     async(req, res) => {
         try {
             let { body, file, user } = req;
-            let pathy = req.file.location;
-
+            let pathy = "";
+            pathy = req.file.location;
             //let profile = await Profile.findOneAndUpdate({ account: user._id }, { name: body.name, dob: body.dob, city: body.city, state: body.state, country: body.country, about: body.about, gender: body.gender, phone: body.phone, avatar: path }, { new: true });
             let profile = await Profile.findOneAndUpdate({ account: user._id }, { name: body.name, about: body.about, phone: body.phone, avatar: pathy }, { new: true });
 
@@ -591,10 +687,30 @@ router.put(
     }
 );
 
+router.put(
+    "/api/edit-profile",
+    userAuth,
+    uploadProfileAvatars3.single("avatar"),
+    async(req, res) => {
+        try {
+            let { body, file, user } = req;
 
+            //let profile = await Profile.findOneAndUpdate({ account: user._id }, { name: body.name, dob: body.dob, city: body.city, state: body.state, country: body.country, about: body.about, gender: body.gender, phone: body.phone, avatar: path }, { new: true });
+            let profile = await Profile.findOneAndUpdate({ account: user._id }, { name: body.name, about: body.about, phone: body.phone }, { new: true });
 
-
-
+            return res.status(200).json({
+                success: true,
+                message: "Your profile is now updated",
+                profile,
+            });
+        } catch (err) {
+            return res.status(400).json({
+                success: false,
+                message: "Unable to create the profile.",
+            });
+        }
+    }
+);
 
 
 router.post(
@@ -605,6 +721,8 @@ router.post(
     async(req, res) => {
         //try {
         let { body, user } = req;
+        console.log(req.file, req.body);
+
 
         let result = await Following.findOne({ userid: user._id, followingid: req.body.profileid });
         let follow = true;
@@ -633,7 +751,9 @@ router.post(
                             if (err) return res.status(501).send(err);
                             const response = {
                                 message: "unfollow updated",
+
                             };
+
                         }
                     );
                     if (resultrp.followerstatus == true) {
@@ -681,6 +801,16 @@ router.post(
             followstatus: "valid",
         });
         await follower.save();
+
+        // if (!profileupdatestatus) {
+        //     return res.status(500).json({
+        //         success: false,
+        //         message: "nothing",
+        //     });
+        // } else {
+        //     profileupdatestatus.isprofileverified = true;
+        //     await profileupdatestatus.save();
+        // }
         return res.status(200).json({
             success: true,
             messgae: "you started unfollowing",
@@ -689,11 +819,6 @@ router.post(
 
     }
 );
-
-
-
-
-
 
 router.post(
     "/user/follow",
@@ -789,6 +914,15 @@ router.post(
             notifystatus: `valid`,
         });
         await notify.save();
+        // if (!profileupdatestatus) {
+        //     return res.status(500).json({
+        //         success: false,
+        //         message: "nothing",
+        //     });
+        // } else {
+        //     profileupdatestatus.isprofileverified = true;
+        //     await profileupdatestatus.save();
+        // }
         return res.status(200).json({
             success: true,
             messgae: "you started following",
@@ -797,17 +931,6 @@ router.post(
 
     }
 );
-
-
-
-
-
-
-
-
-
-
-
 router.post(
     "/user/getfollowstatus",
     userAuth,
@@ -834,6 +957,7 @@ router.post(
                     message: "your are following",
                 });
             } else {
+
                 return res.status(201).json({
                     success: false,
                     status: true,
@@ -841,7 +965,9 @@ router.post(
                     message: "your are unfollowing",
                 });
             }
+
         }
+
         return res.status(201).json({
             success: false,
             status: true,
@@ -850,11 +976,6 @@ router.post(
         });
     }
 );
-
-
-
-
-
 
 router.get("/user/follow/:profileid", userAuth, profileiid, Validator, async(req, res) => {
     // try {
@@ -880,7 +1001,9 @@ router.get("/user/follow/:profileid", userAuth, profileiid, Validator, async(req
                 message: `profile  found. follow status:-${resu.followingstatus}`,
             });
         }
+
     }
+
     // } catch (err) {
     //     return res.status(400).json({
     //         success: false,
@@ -889,13 +1012,12 @@ router.get("/user/follow/:profileid", userAuth, profileiid, Validator, async(req
     // }
 });
 
-
-
-
-
-
-
-
+/**
+ * @description To get user's profile with the username
+ * @api /profiles/api/update-profile
+ * @access Public
+ * @type GET
+ */
 router.get("/api/profile-user/:profileid", userAuth, profileiid, Validator, async(req, res) => {
     try {
         let { username } = req.params;

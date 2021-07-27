@@ -30,31 +30,34 @@ import SlugGenerator from "../functions/slug-generator.js";
 import validator from "../middlewares/validator-middleware.js";
 import { postValidations } from "../validators/post-validators.js";
 import { uploadPostImage as uploader } from "../middlewares/uploader.js";
-
+import { uploadexplanmedia, uploadquestmedia } from "../middlewares/uploader.js";
 const router = Router();
 
 
 
 
-
-
-
-
+/**
+ * @description To Upload Post Image
+ * @api /posts/api/post-image-upload
+ * @access private
+ * @type POST
+ */
 router.post(
     "/api/quests/upload",
     userAuth,
-    uploader.single("qmedia"),
+    uploader,
     async(req, res) => {
         try {
             let { file } = req;
-            let filename = req.file.location;
+            image = req.files.qmedia[0];
+            image1 = req.files.emedia[0];
             return res.status(200).json({
                 filename,
                 success: true,
                 message: "Image Uploaded Successfully.",
             });
         } catch (err) {
-            return res.status(400).json({
+            return res.status(404).json({
                 success: false,
                 message: "Unable to create the post.",
             });
@@ -62,19 +65,16 @@ router.post(
     }
 );
 
-
-
-
-
-
-
-
-
+/**
+ * @description To create a new post by the authenticated User
+ * @api /posts/api/create-post
+ * @access private
+ * @type POST
+ */
 router.post(
     "/quest/create/mcq5",
-
     userAuth,
-    uploader.single("qmedia"),
+    uploader,
     async(req, res) => {
         // try {
         // Create a new Post
@@ -82,70 +82,128 @@ router.post(
         var image = "",
             image1 = "";
         var qtype5 = "Mcq-5";
+        var qsubcs = "";
         if (body) {
-            if (!file) {
-                let quest = new Quest({
-                    userid: user._id,
-                    qtitle: body.qtitle,
-                    qcategory: body.qcategory,
-                    qsubcat: body.qsubcat,
-                    qtype: qtype5,
-                    qpositive: body.qpositive,
-                    qnegative: body.qnegative,
-                    qopt1: body.qopt1,
-                    qopt2: body.qopt2,
-                    qopt3: body.qopt3,
-                    qopt4: body.qopt4,
-                    qopt5: body.qopt5,
-                    qans: body.qans,
-                    qexp: body.qexp,
-                    qexpmedia: "",
-                    qmedia: "noimage",
-                    qstatus: "valid",
-                    qtitleslug: body.qtitle,
-                });
-                await quest.save();
-                return res.status(200).json({
-                    quest,
-                    //file,
-                    success: true,
-                    message: "Your quest is published.",
-                });
+            if (body.qmedia === "") {
+                if (body.emedia === "") {
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype5,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qopt3: body.qopt3,
+                        qopt4: body.qopt4,
+                        qopt5: body.qopt5,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: "",
+                        qmedia: "noimage",
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                } else {
+                    image1 = req.files.emedia[0].location;
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype5,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qopt3: body.qopt3,
+                        qopt4: body.qopt4,
+                        qopt5: body.qopt5,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: image1,
+                        qmedia: "noimage",
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                }
             } else {
-
-                image = req.file.location;
-                let quest = new Quest({
-                    userid: user._id,
-                    qtitle: body.qtitle,
-                    qcategory: body.qcategory,
-                    qsubcat: body.qsubcat,
-                    qtype: qtype5,
-                    qpositive: body.qpositive,
-                    qnegative: body.qnegative,
-                    qopt1: body.qopt1,
-                    qopt2: body.qopt2,
-                    qopt3: body.qopt3,
-                    qopt4: body.qopt4,
-                    qopt5: body.qopt5,
-                    qans: body.qans,
-                    qexp: body.qexp,
-                    qexpmedia: "",
-                    qmedia: image,
-                    qstatus: "valid",
-                    qtitleslug: body.qtitle,
-                });
-                await quest.save();
-
-                return res.status(201).json({
-                    quest,
-                    success: true,
-                    message: "Your quest is published.",
-                });
-
+                if (body.emedia === "") {
+                    image = req.files.qmedia[0];
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype5,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qopt3: body.qopt3,
+                        qopt4: body.qopt4,
+                        qopt5: body.qopt5,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: "",
+                        qmedia: image,
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                } else {
+                    image = req.files.qmedia[0].location;
+                    image1 = req.files.emedia[0].location;
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype5,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qopt3: body.qopt3,
+                        qopt4: body.qopt4,
+                        qopt5: body.qopt5,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: image1,
+                        qmedia: image,
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                }
             }
 
         } else {
-            return res.status(400).json({
+            return res.status(404).json({
                 success: false,
                 message: "please fill the fields",
             });
@@ -161,7 +219,238 @@ router.post(
 
 
 
+router.post(
+    "/quest/create/mcq5/type4",
+    userAuth,
+    uploader,
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype5 = "Mcq-5";
+        var qsubcs = "";
+        if (body) {
 
+            image = req.files.qmedia[0].location;
+            image1 = req.files.emedia[0].location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype5,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qopt3: body.qopt3,
+                qopt4: body.qopt4,
+                qopt5: body.qopt5,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+
+router.post(
+    "/quest/create/mcq5/type1",
+    userAuth,
+    uploader,
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype5 = "Mcq-5";
+        var qsubcs = "";
+        if (body) {
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype5,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qopt3: body.qopt3,
+                qopt4: body.qopt4,
+                qopt5: body.qopt5,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+router.post(
+    "/quest/create/mcq5/type2",
+    userAuth,
+    uploadquestmedia.single("qmedia"),
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+
+        var image = "",
+            image1 = "noimage";
+        var qtype5 = "Mcq-5";
+        var qsubcs = "";
+        if (body) {
+
+            image = req.file.location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype5,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qopt3: body.qopt3,
+                qopt4: body.qopt4,
+                qopt5: body.qopt5,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+router.post(
+    "/quest/create/mcq5/type3",
+    userAuth,
+    uploadexplanmedia.single("emedia"),
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype5 = "Mcq-5";
+        var qsubcs = "";
+        if (body) {
+
+            image1 = req.file.location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype5,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qopt3: body.qopt3,
+                qopt4: body.qopt4,
+                qopt5: body.qopt5,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
 
 
 
@@ -171,79 +460,143 @@ router.post(
 router.post(
     "/quest/create/mcq4",
     userAuth,
-    uploader.single("qmedia"),
+    uploader,
 
     //  uploader.fields([{ name: 'qmedia', maxCount: 10 }, { name: 'explan', maxCount: 2 }]),
     async(req, res) => {
         // try {
         // Create a new Post
         let { body, user, file, file1, files } = req;
-
         //console.log(req.body, req.files, req.file.location, req.file.location);
         var image = "",
             image1 = "";
         var qtype4 = "Mcq-4";
+        var qsubcs = "";
         if (body) {
-            if (!file) {
+            if (body.qmedia === "") {
+                if (body.emedia === "") {
 
-
-                let quest = new Quest({
-                    userid: user._id,
-                    qtitle: body.qtitle,
-                    qcategory: body.qcategory,
-                    qsubcat: body.qsubcat,
-                    qtype: qtype4,
-                    qpositive: body.qpositive,
-                    qnegative: body.qnegative,
-                    qopt1: body.qopt1,
-                    qopt2: body.qopt2,
-                    qopt3: body.qopt3,
-                    qopt4: body.qopt4,
-                    qans: body.qans,
-                    qexp: body.qexp,
-                    qexpmedia: "",
-                    qmedia: "noimage",
-                    qstatus: "valid",
-                    qtitleslug: body.qtitle,
-                });
-                await quest.save();
-                return res.status(200).json({
-                    quest,
-                    //file,
-                    success: true,
-                    message: "Your quest is published.",
-                });
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype4,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qopt3: body.qopt3,
+                        qopt4: body.qopt4,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: "",
+                        qmedia: "noimage",
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                } else {
+                    image1 = req.files.emedia[0].location;
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype4,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qopt3: body.qopt3,
+                        qopt4: body.qopt4,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: image1,
+                        qmedia: "noimage",
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                }
             } else {
-                image = req.file.location;
-                let quest = new Quest({
-                    userid: user._id,
-                    qtitle: body.qtitle,
-                    qcategory: body.qcategory,
-                    qsubcat: body.qsubcat,
-                    qtype: qtype4,
-                    qpositive: body.qpositive,
-                    qnegative: body.qnegative,
-                    qopt1: body.qopt1,
-                    qopt2: body.qopt2,
-                    qopt3: body.qopt3,
-                    qopt4: body.qopt4,
-                    qans: body.qans,
-                    qexp: body.qexp,
-                    qexpmedia: "",
-                    qmedia: image,
-                    qstatus: "valid",
-                    qtitleslug: body.qtitle,
-                });
-                await quest.save();
 
-                return res.status(201).json({
-                    quest,
-                    success: true,
-                    message: "Your quest is published.",
-                });
+                if (body.emedia === "") {
+
+
+                    image = req.files.qmedia[0];
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype4,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qopt3: body.qopt3,
+                        qopt4: body.qopt4,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: "",
+                        qmedia: image,
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                } else {
+
+                    image = req.files.qmedia[0].location;
+                    image1 = req.files.emedia[0].location;
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype4,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qopt3: body.qopt3,
+                        qopt4: body.qopt4,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: image1,
+                        qmedia: image,
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                }
             }
+
         } else {
-            return res.status(400).json({
+
+
+            return res.status(404).json({
+
                 success: false,
                 message: "please fill the fields",
             });
@@ -260,7 +613,234 @@ router.post(
 
 
 
+router.post(
+    "/quest/create/mcq4/type4",
+    userAuth,
+    uploader,
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype4 = "Mcq-4";
+        var qsubcs = "";
+        if (body) {
 
+            image = req.files.qmedia[0].location;
+            image1 = req.files.emedia[0].location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype4,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qopt3: body.qopt3,
+                qopt4: body.qopt4,
+
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+
+router.post(
+    "/quest/create/mcq4/type1",
+    userAuth,
+    uploader,
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype4 = "Mcq-4";
+        var qsubcs = "";
+        if (body) {
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype4,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qopt3: body.qopt3,
+                qopt4: body.qopt4,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+router.post(
+    "/quest/create/mcq4/type2",
+    userAuth,
+    uploadquestmedia.single("qmedia"),
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype4 = "Mcq-4";
+        var qsubcs = "";
+        if (body) {
+
+            image = req.file.location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype4,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qopt3: body.qopt3,
+                qopt4: body.qopt4,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+router.post(
+    "/quest/create/mcq4/type3",
+    userAuth,
+    uploadexplanmedia.single("emedia"),
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype4 = "Mcq-4";
+        var qsubcs = "";
+        if (body) {
+
+            image1 = req.file.location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype4,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qopt3: body.qopt3,
+                qopt4: body.qopt4,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
 
 
 
@@ -270,7 +850,7 @@ router.post(
 router.post(
     "/quest/create/mcq3",
     userAuth,
-    uploader.single("qmedia"),
+    uploader,
     async(req, res) => {
         // try {
         // Create a new Post
@@ -278,63 +858,132 @@ router.post(
         var image = "",
             image1 = "";
         var qtype3 = "Mcq-3";
+        var qsubcs = "";
         if (body) {
-            if (!file) {
+            if (body.qmedia === "") {
+                if (body.emedia === "") {
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype3,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qopt3: body.qopt3,
 
-                let quest = new Quest({
-                    userid: user._id,
-                    qtitle: body.qtitle,
-                    qcategory: body.qcategory,
-                    qsubcat: body.qsubcat,
-                    qtype: qtype3,
-                    qpositive: body.qpositive,
-                    qnegative: body.qnegative,
-                    qopt1: body.qopt1,
-                    qopt2: body.qopt2,
-                    qopt3: body.qopt3,
-                    qans: body.qans,
-                    qexp: body.qexp,
-                    qexpmedia: "",
-                    qmedia: "noimage",
-                    qstatus: "valid",
-                    qtitleslug: body.qtitle,
-                });
-                await quest.save();
-                return res.status(200).json({
-                    quest,
-                    //file,
-                    success: true,
-                    message: "Your quest is published.",
-                });
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: "",
+                        qmedia: "noimage",
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                } else {
+                    image1 = req.files.emedia[0].location;
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype3,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qopt3: body.qopt3,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: image1,
+                        qmedia: "noimage",
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                }
+
+
+
             } else {
-                image = req.file.location;
-                let quest = new Quest({
-                    userid: user._id,
-                    qtitle: body.qtitle,
-                    qcategory: body.qcategory,
-                    qsubcat: body.qsubcat,
-                    qtype: qtype3,
-                    qpositive: body.qpositive,
-                    qnegative: body.qnegative,
-                    qopt1: body.qopt1,
-                    qopt2: body.qopt2,
-                    qopt3: body.qopt3,
-                    qans: body.qans,
-                    qexp: body.qexp,
-                    qexpmedia: "",
-                    qmedia: image,
-                    qstatus: "valid",
-                    qtitleslug: body.qtitle,
-                });
-                await quest.save();
-                return res.status(201).json({
-                    quest,
-                    success: true,
-                    message: "Your quest is published.",
-                });
+
+                if (body.emedia === "") {
+
+                    image = req.files.qmedia[0];
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype3,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qopt3: body.qopt3,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: "",
+                        qmedia: image,
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                } else {
+
+                    image = req.files.qmedia[0].location;
+                    image1 = req.files.emedia[0].location;
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype3,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qopt3: body.qopt3,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: image1,
+                        qmedia: image,
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                }
             }
+
+
+
         } else {
-            return res.status(400).json({
+
+
+            return res.status(404).json({
+
                 success: false,
                 message: "please fill the fields",
             });
@@ -350,9 +999,234 @@ router.post(
 
 
 
+router.post(
+    "/quest/create/mcq3/type4",
+    userAuth,
+    uploader,
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype3 = "Mcq-3";
+        var qsubcs = "";
+        if (body) {
+
+            image = req.files.qmedia[0].location;
+            image1 = req.files.emedia[0].location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype3,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qopt3: body.qopt3,
+
+
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
 
 
 
+router.post(
+    "/quest/create/mcq3/type1",
+    userAuth,
+    uploader,
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype3 = "Mcq-3";
+        var qsubcs = "";
+        if (body) {
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype3,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qopt3: body.qopt3,
+
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+router.post(
+    "/quest/create/mcq3/type2",
+    userAuth,
+    uploadquestmedia.single("qmedia"),
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype3 = "Mcq-3";
+        var qsubcs = "";
+        if (body) {
+
+            image = req.file.location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype3,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qopt3: body.qopt3,
+
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+router.post(
+    "/quest/create/mcq3/type3",
+    userAuth,
+    uploadexplanmedia.single("emedia"),
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype3 = "Mcq-3";
+        var qsubcs = "";
+        if (body) {
+
+            image1 = req.file.location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype3,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qopt3: body.qopt3,
+
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
 
 
 
@@ -360,7 +1234,7 @@ router.post(
 router.post(
     "/quest/create/mcq2",
     userAuth,
-    uploader.single("qmedia"),
+    uploader,
     async(req, res) => {
         // try {
         // Create a new Post
@@ -368,61 +1242,125 @@ router.post(
         var image = "",
             image1 = "";
         var qtype2 = "Mcq-2";
+        var qsubcs = "";
         if (body) {
-            if (!file) {
-                let quest = new Quest({
-                    userid: user._id,
-                    qtitle: body.qtitle,
-                    qcategory: body.qcategory,
-                    qsubcat: body.qsubcat,
-                    qtype: qtype2,
-                    qpositive: body.qpositive,
-                    qnegative: body.qnegative,
-                    qopt1: body.qopt1,
-                    qopt2: body.qopt2,
-                    qans: body.qans,
-                    qexp: body.qexp,
+            if (body.qmedia === "") {
+                if (body.emedia === "") {
 
-                    qexpmedia: "",
-                    qmedia: "noimage",
-                    qstatus: "valid",
-                    qtitleslug: body.qtitle,
-                });
-                await quest.save();
-                return res.status(200).json({
-                    quest,
-                    //file,
-                    success: true,
-                    message: "Your quest is published.",
-                });
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype2,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: "",
+                        qmedia: "noimage",
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                } else {
+                    image1 = req.files.emedia[0].location;
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype2,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: image1,
+                        qmedia: "noimage",
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                }
+
+
+
             } else {
-                image = req.file.location;
-                let quest = new Quest({
-                    userid: user._id,
-                    qtitle: body.qtitle,
-                    qcategory: body.qcategory,
-                    qsubcat: body.qsubcat,
-                    qtype: qtype2,
-                    qpositive: body.qpositive,
-                    qnegative: body.qnegative,
-                    qopt1: body.qopt1,
-                    qopt2: body.qopt2,
-                    qans: body.qans,
-                    qexp: body.qexp,
-                    qexpmedia: "",
-                    qmedia: image,
-                    qstatus: "valid",
-                    qtitleslug: body.qtitle,
-                });
-                await quest.save();
-                return res.status(201).json({
-                    quest,
-                    success: true,
-                    message: "Your quest is published.",
-                });
+
+                if (body.emedia === "") {
+
+                    image = req.files.qmedia[0];
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype2,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: "",
+                        qmedia: image,
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                } else {
+
+                    image = req.files.qmedia[0].location;
+                    image1 = req.files.emedia[0].location;
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype2,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qopt2: body.qopt2,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: image1,
+                        qmedia: image,
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                }
             }
+
         } else {
-            return res.status(400).json({
+            return res.status(404).json({
                 success: false,
                 message: "please fill the fields",
             });
@@ -437,6 +1375,232 @@ router.post(
 );
 
 
+
+
+router.post(
+    "/quest/create/mcq2/type4",
+    userAuth,
+    uploader,
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype2 = "Mcq-2";
+        var qsubcs = "";
+        if (body) {
+
+            image = req.files.qmedia[0].location;
+            image1 = req.files.emedia[0].location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype2,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+
+
+
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+
+router.post(
+    "/quest/create/mcq2/type1",
+    userAuth,
+    uploader,
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype2 = "Mcq-2";
+        var qsubcs = "";
+        if (body) {
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype2,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+
+
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+router.post(
+    "/quest/create/mcq2/type2",
+    userAuth,
+    uploadquestmedia.single("qmedia"),
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype2 = "Mcq-2";
+        var qsubcs = "";
+        if (body) {
+
+            image = req.file.location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype2,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+router.post(
+    "/quest/create/mcq2/type3",
+    userAuth,
+    uploadexplanmedia.single("emedia"),
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "noimage";
+        var qtype2 = "Mcq-2";
+        var qsubcs = "";
+        if (body) {
+
+            image1 = req.file.location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype2,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qopt2: body.qopt2,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
 
 
 
@@ -445,7 +1609,7 @@ router.post(
 router.post(
     "/quest/create/blank",
     userAuth,
-    uploader.single("qmedia"),
+    uploader,
     async(req, res) => {
         // try {
         // Create a new Post
@@ -453,59 +1617,114 @@ router.post(
         var image = "",
             image1 = "";
         var qtype1 = "Blank";
-
+        var qsubcs = "";
         if (body) {
-            if (!file) {
-                let quest = new Quest({
-                    userid: user._id,
-                    qtitle: body.qtitle,
-                    qcategory: body.qcategory,
-                    qsubcat: body.qsubcat,
-                    qtype: qtype1,
-                    qpositive: body.qpositive,
-                    qnegative: body.qnegative,
-                    qopt1: body.qopt1,
-                    qans: body.qans,
-                    qexp: body.qexp,
-                    qexpmedia: "",
-                    qmedia: "noimage",
-                    qstatus: "valid",
-                    qtitleslug: body.qtitle,
-                });
-                await quest.save();
-                return res.status(200).json({
-                    quest,
-                    //file,
-                    success: true,
-                    message: "Your quest is published.",
-                });
+            if (body.qmedia === "") {
+                if (body.emedia === "") {
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype1,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: "",
+                        qmedia: "noimage",
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                } else {
+                    image1 = req.files.emedia[0].location;
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype1,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: image1,
+                        qmedia: "noimage",
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                }
             } else {
-                image = req.file.location;
-                let quest = new Quest({
-                    userid: user._id,
-                    qtitle: body.qtitle,
-                    qcategory: body.qcategory,
-                    qsubcat: body.qsubcat,
-                    qtype: qtype1,
-                    qpositive: body.qpositive,
-                    qnegative: body.qnegative,
-                    qopt1: body.qopt1,
-                    qans: body.qans,
-                    qexp: body.qexp,
-                    qexpmedia: "",
-                    qmedia: image,
-                    qstatus: "valid",
-                    qtitleslug: body.qtitle,
-                });
-                await quest.save();
-                return res.status(201).json({
-                    quest,
-                    success: true,
-                    message: "Your quest is published.",
-                });
+                if (body.emedia === "") {
+                    image = req.files.qmedia[0];
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype1,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: "",
+                        qmedia: image,
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                } else {
+
+                    image = req.files.qmedia[0].location;
+                    image1 = req.files.emedia[0].location;
+                    let quest = new Quest({
+                        userid: user._id,
+                        qtitle: body.qtitle,
+                        qcategory: body.qcategory,
+                        qsubcat: qsubcs,
+                        qtype: qtype1,
+                        qpositive: body.qpositive,
+                        qnegative: body.qnegative,
+                        qopt1: body.qopt1,
+                        qans: body.qans,
+                        qexp: body.qexp,
+                        qexpmedia: image1,
+                        qmedia: image,
+                        qstatus: "valid",
+                        qtitleslug: body.qtitle,
+                    });
+                    await quest.save();
+                    return res.status(201).json({
+                        quest,
+                        success: true,
+                        message: "Your quest is published.",
+                    });
+                }
             }
+
         } else {
-            return res.status(400).json({
+            return res.status(404).json({
                 success: false,
                 message: "please fill the fields",
             });
@@ -521,9 +1740,232 @@ router.post(
 
 
 
+router.post(
+    "/quest/create/blank4",
+    userAuth,
+    uploader,
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "",
+            image1 = "";
+        var qtype1 = "Blank";
+        var qsubcs = "";
+        if (body) {
+
+            image = req.files.qmedia[0].location;
+            image1 = req.files.emedia[0].location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype1,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
 
 
 
+router.post(
+    "/quest/create/blank1",
+    userAuth,
+    uploader,
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "noimage",
+            image1 = "";
+        var qtype1 = "Blank";
+        var qsubcs = "";
+
+        if (body) {
+            //console.log(body);
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype1,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+router.post(
+    "/quest/create/blank2",
+    userAuth,
+    uploadquestmedia.single("qmedia"),
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "noimage",
+            image1 = "";
+        var qtype1 = "Blank";
+        var qsubcs = "";
+        if (body) {
+
+            image = req.file.location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype1,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+router.post(
+    "/quest/create/blank3",
+    userAuth,
+    uploadexplanmedia.single("emedia"),
+    async(req, res) => {
+        // try {
+        // Create a new Post
+        let { body, user, file, file1 } = req;
+        var image = "noimage",
+            image1 = "";
+        var qtype1 = "Blank";
+        var qsubcs = "";
+        if (body) {
+
+            image1 = req.file.location;
+            let quest = new Quest({
+                userid: user._id,
+                qtitle: body.qtitle,
+                qcategory: body.qcategory,
+                qsubcat: qsubcs,
+                qtype: qtype1,
+                qpositive: body.qpositive,
+                qnegative: body.qnegative,
+                qopt1: body.qopt1,
+                qans: body.qans,
+                qexp: body.qexp,
+                qexpmedia: image1,
+                qmedia: image,
+                qstatus: "valid",
+                qtitleslug: body.qtitle,
+            });
+            await quest.save();
+            return res.status(201).json({
+                quest,
+                success: true,
+                message: "Your quest is published.",
+            });
+
+
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "please fill the fields",
+            });
+        }
+        // } catch (err) {
+        //     return res.status(501).json({
+        //         success: false,
+        //         message: "Unable to create the quest.",
+        //     });
+        // }
+    }
+);
+
+
+
+/**
+ * @description To like a post by authenticated user
+ * @api /posts/api/like-post
+ * @access private
+ * @type PUT
+ */
 router.put("/api/like-post/:id", userAuth, async(req, res) => {
     try {
         let { id } = req.params;
@@ -554,11 +1996,13 @@ router.put("/api/like-post/:id", userAuth, async(req, res) => {
             message: "You liked this post.",
         });
     } catch (err) {
-        return res.status(400).json({
+        return res.status(404).json({
             success: false,
             message: "Unable to like the post. Please try again later.",
         });
     }
 });
+
+
 
 export default router;
