@@ -855,11 +855,11 @@ router.get("/verify-now/:verificationCode", async(req, res) => {
         user.verificationCode = undefined;
         await user.save();
         return res.sendFile(
-            path.join(__dirname, "./telsuko/templates/verification-success.html")
+            path.join(__dirname, "./templates/verification-success.html")
         );
     } catch (err) {
         console.log("ERR", err.message);
-        return res.sendFile(path.join(__dirname, "./telsuko/templates/errors.html"));
+        return res.sendFile(path.join(__dirname, "./templates/errors.html"));
     }
 });
 
